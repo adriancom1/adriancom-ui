@@ -1,0 +1,25 @@
+{
+  "name": "adriancom-ui",
+  "description": "A personal portfolio project located at adrian-s.com",
+  "version": "1.0.0",
+  "homepage": "http://www.adrian-s.com",
+  "private": true,
+
+  "dependencies": {
+    "angular": "1.4.x",
+    "angular-route": "1.4.x",
+    "angular-resource": "1.4.x"
+  },
+
+  "authors": [
+    "Adrian Sanoguel <adriansan1@gmail.com>"
+  ],
+  
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -17,6 +17,8 @@
     "aws": "grunt push:aws",
     "server": "http-server -a 0.0.0.0 -p 8000",
     "open-dev": "open http://localhost:8000/",
-    "build-dev": "grunt push:static:dev"
+    "build-dev": "grunt push:static:dev",
+    "build-prod": "grunt push:static:dev"
+
   }
 }

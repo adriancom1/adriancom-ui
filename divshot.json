@@ -1,0 +1,10 @@
+{
+  "name": "adriancom-ui",
+  "root": "public/",
+  "clean_urls": true,
+  "error_page": "error.html",
+  "exclude" : [
+  	"bower.json", "divshot.json", "Gruntfile.js", "node_modules", "package.json",
+  	"public/media", "public/img"
+  ]
+}

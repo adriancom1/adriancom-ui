@@ -26,7 +26,7 @@ var Scenes = (function() {
     },
     isBackgroundImageLoaded : function(element, callback) {
       //set the initial short delay
-      setTimeout(start, this._bandwidthCalc(25, 250));
+      setTimeout(start, this._bandwidthCalc(25, 140));
       function start() {
         var img = new Image();
         var el = document.getElementById(element);

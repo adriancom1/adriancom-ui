@@ -78,7 +78,7 @@ body.main .cover {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: #172343 url(../img/bg-a-logo.png) no-repeat center center fixed;
+  background: #172343 url(http://adriancom.s3-website-us-west-2.amazonaws.com/img/bg-a-logo.png) no-repeat center center fixed;
   z-index: 100;
 }
 
@@ -1038,7 +1038,7 @@ p.divider-line span {
 #about h1, #contact h1, #works h1 {
   color: #bebebe;
   font-family: "Open Sans", serif;
-  background:url(../img/gridme-light.png); 
+  background:url(http://adriancom.s3-website-us-west-2.amazonaws.com/img/gridme-light.png); 
   text-transform: uppercase;
   height: 68px;
   padding: 35px 0;
@@ -1089,7 +1089,7 @@ p.divider-line span {
 }
 
 #about-how {
-  background: #09091a url(../img/bg-light-bulbs.jpg) no-repeat center center fixed;
+  background: #09091a url(http://adriancom.s3-website-us-west-2.amazonaws.com/img/bg-light-bulbs.jpg) no-repeat center center fixed;
   background-size: cover;
   height: inherit;
   white-space: nowrap;
@@ -1175,7 +1175,7 @@ p.divider-line span {
   position: absolute;
   top: 15px;
   left: 15px;
-  background: #fff url(../img/a-logo2.png) no-repeat center center;
+  background: #fff url(http://adriancom.s3-website-us-west-2.amazonaws.com/img/a-logo2.png) no-repeat center center;
   opacity: 0.5;
   background-color: #fff;
   width: 50px;
@@ -1405,7 +1405,7 @@ p.divider-line span {
   width: 100%;
   bottom: 0;
   height: 200px;
-  background: #031421 url(../img/dark_mosaic.png);
+  background: #031421 url(http://adriancom.s3-website-us-west-2.amazonaws.com/img/dark_mosaic.png);
   text-align: left; 
 }
 

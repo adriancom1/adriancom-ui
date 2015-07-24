@@ -32,7 +32,7 @@
 	    </defs>
 	</svg>
 	<video id="bgvid" preload="auto" loop="loop" muted="muted" volume="0" class="home-hide">
-        <source src="media/portfolio-bg.mp4" type="video/mp4">
+        <source src="http://adriancom.s3-website-us-west-2.amazonaws.com/media/portfolio-bg.mp4" type="video/mp4">
 		Video not supported
     </video>
 	<header id="main-header" class="home-hide masthead" role="banner">
@@ -202,7 +202,7 @@
 								<p class="ch1 fx">Client - Fox Business</p>
 								<div class="fx-hover"></div>
 							</figcaption>
-							<img src="img/pic.jpg" class="fx">
+							<img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/pic.jpg" class="fx">
 						</figure>
 					</a>
 					<a href="#" class="project">
@@ -212,7 +212,7 @@
 								<p class="ch1 fx">Client - Fox Business</p>
 								<div class="fx-hover"></div>
 							</figcaption>
-							<img src="img/pic.jpg" class="fx">
+							<img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/pic.jpg" class="fx">
 						</figure>
 					</a>
 					<a href="#" class="project">
@@ -222,7 +222,7 @@
 								<p class="ch1 fx">Client - Fox Business</p>
 								<div class="fx-hover"></div>
 							</figcaption>
-							<img src="img/pic.jpg" class="fx">
+							<img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/pic.jpg" class="fx">
 						</figure>
 					</a>
 				</div>
@@ -234,7 +234,7 @@
 								<p class="ch1 fx">Client - Fox Business</p>
 								<div class="fx-hover"></div>
 							</figcaption>
-							<img src="img/pic.jpg" class="fx">
+							<img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/pic.jpg" class="fx">
 						</figure>
 					</a>
 					<a href="#" class="project">
@@ -244,7 +244,7 @@
 								<p class="ch1 fx">Client - Fox Business</p>
 								<div class="fx-hover"></div>
 							</figcaption>
-							<img src="img/pic.jpg" class="fx">
+							<img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/pic.jpg" class="fx">
 						</figure>
 					</a>
 					<a href="#" class="project">
@@ -254,7 +254,7 @@
 								<p class="ch1 fx">Client - Fox Business</p>
 								<div class="fx-hover"></div>
 							</figcaption>
-							<img src="img/pic.jpg" class="fx">
+							<img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/pic.jpg" class="fx">
 						</figure>
 					</a>
 				</div>
@@ -280,29 +280,39 @@
 			</div>
 		</footer>			
 	</div>
-<script type="text/javascript" src="js/dom-utils.js"></script>
-<script type="text/javascript" src="js/scroll-utils.js"></script>
-<script type="text/javascript" src="js/gridanim.js"></script>
-<script type="text/javascript" src="js/scenes.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+
+<!-- adrian:js -->
+<!-- endadrian -->	
 <script type="text/javascript">
 	window.onload = function() {
 		Scenes.init(function(event) {
 			if(event.target.id != 'intro-panel-top') return;
-				Scenes.remove('intro', ['home']);		
+				Scenes.remove('intro', ['home']);
 				//Play Video
 				var video = ScrollUtils.getElement('bgvid');
-				if(video.readyState === 4) {
+				//if(video.readyState === 2) {
 					DomUtils.fxOn('js-main-cover');
 					setTimeout(function() {
+						console.log('wait for video to play')
 						DomUtils.remove('js-main-cover');
 						video.play();
-					}, 500);				
-				}			
+					}, 350);
+				//}			
 		});
 	};
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
 
 

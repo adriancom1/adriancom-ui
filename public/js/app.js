@@ -24,6 +24,8 @@ var mainMenuHandlerTarget = function(element, apply) {
 	 toggleMenu.call(this);
 };
 
+var cdnEndPoint = 'http://adriancom.s3-website-us-west-2.amazonaws.com';
+
 DomUtils.onclick('js-lines', mainMenuHandler);
 DomUtils.onclick('js-back', mainMenuHandlerTarget);
 DomUtils.onclick('js-cta', mainMenuHandlerTarget);
@@ -96,7 +98,7 @@ var grid = Grid.generate({
 
 });
 grid.randomizeClicks();
-grid.loadGridImages('img/works', 'jpg');
+grid.loadGridImages(cdnEndPoint + '/img/works', 'jpg');
 
 
 //FireFox Override Styles
@@ -106,6 +108,6 @@ if(!~navigator.userAgent.toLowerCase().indexOf('firefox') == 0) {
 }
 DomUtils.randomBg({
 	selector : 'body.home .intro-text .intro-text-middle .bg',
-	folder: 'img/bg',
+	folder: cdnEndPoint + '/img/bg',
 	images : ['boats.jpg', 'bulb.jpg', 'forest.jpg', 'jets.jpg', 'lights.jpg', 'ocean.jpg', 'snow.jpg']	
 });

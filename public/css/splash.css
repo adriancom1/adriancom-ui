@@ -6,7 +6,7 @@ body.home {
 }
 
 body.home.main-intro-end {
-  background: #172343 url(../img/bg-a-logo.png) no-repeat center center fixed;
+  background: #172343 url(http://adriancom.s3-website-us-west-2.amazonaws.com/img/bg-a-logo.png) no-repeat center center fixed;
 }
 
 body.home .intro-text {
@@ -196,7 +196,7 @@ body.home.header-one .intro-text h1 span.one, body.home.header-two .intro-text h
 }
 
 body.home .logo {
-  background: #fff url(../img/a-logo2.png) no-repeat 2px 8px;
+  background: #fff url(http://adriancom.s3-website-us-west-2.amazonaws.com/img/a-logo2.png) no-repeat 2px 8px;
   -webkit-border-radius:50px;
   -moz-border-radius:50px;
   border-radius:50px;
@@ -208,7 +208,7 @@ body.home .logo {
 }
 
 .main-intro .preloading-logo {
-  /*background: #fff url(../img/a-logo2.png) no-repeat 2px 8px;*/
+  /*background: #fff url(http://adriancom.s3-website-us-west-2.amazonaws.com/img/a-logo2.png) no-repeat 2px 8px;*/
  /* outline: 1px solid transparent;
   margin-top: -232px;
   background-color: #fff;

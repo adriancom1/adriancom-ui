@@ -32,7 +32,6 @@ module.exports = function(grunt) {
 				cd('../../');
 	    	},
 	    	js: {
-	    		//staticFiles: '<%=files%>',
 	    		buildLoc : '<%=dir.dest%>',
 	    		name : '<%=pkg.name%>',
 	    		root: '<%=dir.root%>',
@@ -54,14 +53,13 @@ module.exports = function(grunt) {
 		    	var environment = environment || 'development';
 		    	run('divshot push ' + environment, 'Sync failed.', 'Static files were pushed to ' + environment);
 		    },
-		    // git: function() {
-		    // 	run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
-		    // }
+		    git: function() {
+		    	run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
+		    }
 	  	},
 		concat: {
 			options: {
 				separator: ';',
-				//stripBanners: true,
       			banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n */',
 			},
 			main: {
@@ -202,13 +200,23 @@ module.exports = function(grunt) {
 			case 'main':
 				banner.call(this, grunt);
 				var data = this.data;
+
+				//Dynamically inject a generated <script> tag into the specified target file
 				var beginTag = '<!-- adrian:js -->';
 				var endTag = '<!-- endadrian -->';
 				var sourceFile = pwd() + '/' + data.dir.root + '/' + data.staticFiles[0];
-
+				var genScript = scriptTag('http://' + data.endPoint + '/js/' + this.target +'-'+ data.pkg + '.min.js');
 				var gRet = grep('-v', beginTag, sourceFile).split(endTag);
+				
+				//Check for the existance of a <script> tag outside of the 'inject' delimiters
+				var tmp = gRet[0];
+				//Check for injected script location
+				var scLoc = tmp.length - genScript.length;
+				if(~(tmp.substr(scLoc)).indexOf('<script') != 0 ) {
+					gRet[0] = gRet[0].substr(0, scLoc);
+				}
 				gRet.splice(1, 0, beginTag + '\n');
-				gRet.splice(2, 0, scriptTag('http://' + data.endPoint + '/js/' + this.target +'-'+ data.pkg + '.min.js'));
+				gRet.splice(2, 0, genScript);
 				gRet.splice(3, 0, endTag);
 				
 				//Write File Synchronously

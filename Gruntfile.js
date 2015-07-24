@@ -1,0 +1,284 @@
+require('shelljs/global');
+var fs = require('fs');
+var color = require('bash-color');
+
+//Dependencies:
+hasBin('git', 'http://git-scm.com/downloads');
+hasBin('divshot', 'npm install -g divshot');
+hasBin('aws', 'pip install awscli');
+
+exec('clear');
+
+module.exports = function(grunt) {
+
+	grunt.initConfig({
+		// Multi Tasks Configuration
+		pkg: grunt.file.readJSON('package.json'),		
+	   	dir : {root:'public', src: 'public/js', dest: 'build/js', vendor:'js/vendor/'},
+	   	pwd: function() {
+	   		return pwd();
+	   	},
+	   	endPoint : 'adriancom.s3-website-us-west-2.amazonaws.com',
+	   	push: {
+	    	aws:  function() {
+				//Change to the Assets folder
+				cd('public/assets');
+				
+				//Run the Sync Command. This should copy files and directories over to AWS
+				run('aws s3 sync . s3://adriancom --exclude ".DS_*"', 'AWS S3 Synch failed',
+					'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
+				
+				//Reset cwd location
+				cd('../../');
+	    	},
+	    	js: {
+	    		//staticFiles: '<%=files%>',
+	    		buildLoc : '<%=dir.dest%>',
+	    		name : '<%=pkg.name%>',
+	    		root: '<%=dir.root%>',
+	    		src: '<%=dir.src%>'
+	    	},
+	    	projects : {
+	    		endPoint : '<%=endPoint%>',
+	    		staticFiles: ['projects.html'],
+	    		pkg : '<%=pkg.name%>',
+	    		dir : '<%=dir%>'
+	    	},
+	    	main : {
+	    		endPoint : '<%=endPoint%>',
+	    		staticFiles: ['index.html'],
+	    		pkg : '<%=pkg.name%>',
+	    		dir : '<%=dir%>'
+	    	},
+		    static: function(environment) {
+		    	var environment = environment || 'development';
+		    	run('divshot push ' + environment, 'Sync failed.', 'Static files were pushed to ' + environment);
+		    },
+		    // git: function() {
+		    // 	run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
+		    // }
+	  	},
+		concat: {
+			options: {
+				separator: ';',
+				//stripBanners: true,
+      			banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n */',
+			},
+			main: {
+				src: ['<%=dir.src%>/dom-utils.js', '<%=dir.src%>/scroll-utils.js','<%=dir.src%>/gridanim.js',
+					  '<%=dir.src%>/scenes.js', '<%=dir.src%>/app.js','!<%=dir.src%>/ng*.js'],
+				dest: '<%=dir.dest%>/main-<%= pkg.name %>.js'
+			},
+			angular: {
+				src: ['<%=dir.src%>/ng*.js'],
+				dest: '<%=dir.dest%>/ng-<%= pkg.name %>.js'
+			},
+			projects: {
+				src: ['<%=dir.src%>/dom-utils.js', '<%=dir.src%>/scroll-utils.js','<%=dir.src%>/projects.js'],
+				dest: '<%=dir.dest%>/projects-<%= pkg.name %>.js'
+			}
+		},
+		uglify: {
+			options: {
+				banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */',
+				mangle: true
+			},
+			main: {
+				files: {
+					//Destination, Source
+					'<%=dir.dest%>/main-<%= pkg.name %>.min.js': ['<%=dir.dest%>/main-<%= pkg.name %>.js'],
+					'<%=dir.dest%>/ng-<%= pkg.name %>.min.js': ['<%=dir.dest%>/ng-<%= pkg.name %>.js']
+				}				
+		    },
+			projects: {
+				files: {
+					//Destination, Source
+					'<%=dir.dest%>/projects-<%= pkg.name %>.min.js': ['<%=dir.dest%>/projects-<%= pkg.name %>.js']
+				}				
+		    }
+		},
+		wiredep: {
+			main: {
+				src: ['<%=dir.root%>/projects.html']
+			}
+		}	    
+	});
+
+	// Define Multi Tasks
+	grunt.registerMultiTask('push', 'Push source files to specified environments. ', function() {
+		var target = this.target;
+
+		//Helper function to parse the <script> blocks with the CDN Url naming info
+		function parsePath(value) {
+			//If Script not found then return
+			if(~value.indexOf('<script') == 0) return;
+			var parts = [];
+			parts.push(value.split('.com/')[0]);
+			//Extract the sub directories following the .com 
+			var reg = /.com(?=\/[a-zA-Z]).[a-z].*/;
+			var path = value.match(reg)[0];
+			parts.push(path.substr(0,5));
+			path = path.substr(5);
+			path = path.replace(/[a-zA-Z-]*/,'js/vendor');
+			path = path.replace('.js', '.min.js');
+			if(~path.indexOf('-') == 0) {
+				path = path.replace('.js', '.js.gzip');
+			}
+			parts.push(path);
+			return parts.join('');
+		};
+
+		function scriptTag(value) {
+			return '<script src="' + value + '"></script>\n'
+		};
+
+		function injectBower() {
+
+		};
+
+
+		switch(target) {
+			case 'static':
+				var args = arguments[0];
+				banner.call(this, grunt, args);
+				this.data(args);
+			break;
+			case 'js':
+				console.log('START  ',pwd())
+				//pwd() -  Returns the current working directory
+				//Copy Vendor JS Scripts to the Build directory
+				banner.call(this, grunt);
+				var data = this.data;
+	    		cd(data.src+'/vendor');
+				ls().forEach(function(path) {
+					//Copy files to Build for Sync to AWS
+					cp('-Rrf', path + '/*.min.js', '../../../'+data.buildLoc+'/vendor');
+					cp('-Rrf', path + '/*.js.gzip', '../../../'+data.buildLoc+'/vendor');
+				});
+	    		cd('../../../build');
+	    		//If the folder is invalid
+	    		if(ls()[0] !== 'js') exit(1);
+	    		//Sync all of the Vender specific JS Minified & Gzip files
+				run('aws s3 sync . s3://adriancom --exclude "*" --include "*.min.js" --include "*.js.gzip" ', 'AWS S3 Synch failed',
+					'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
+
+
+				//Insert reference to HTML file
+				cd('..');
+				grunt.task.run('wiredep');
+				console.log('END  ',pwd())
+
+			break;
+			case 'projects':
+				banner.call(this, grunt);
+				var data = this.data;
+				var sourceFile = pwd() + '/' + data.dir.root + '/' + data.staticFiles[0];
+				var beginBower = '<!-- bower:js -->';
+				var endBower = '<!-- endbower -->';
+				//Sed Return Value
+				var sedRet = sed('-i', /js\/vendor/g, 'http://' + data.endPoint, sourceFile).split(beginBower);
+				//Split the file into blocks and extract the Bower Wiredep and Script Dependencies
+				sedRet.splice(1, 0, beginBower);
+				//Split the end block from the end of the Bower tag to the end of string
+				var _endBower = sedRet[2].split(endBower);
+				sedRet.splice(2, 1, _endBower[0]);
+				sedRet.push(endBower);
+				sedRet.push(_endBower[1]);
+
+				//Re-format the Script blocks to match the naming structure of AWS Cdn
+				var scriptBlock = sedRet[2].split('</script>');
+				scriptBlock = scriptBlock.map(function(item) {
+					return parsePath(item) + "</script>\n";
+				});
+				//Remove the last item
+				scriptBlock.length = scriptBlock.length-1;
+				scriptBlock.push(scriptTag('http://' + data.endPoint + '/js/' + this.target +'-'+ data.pkg + '.min.js'));
+				//Append the newly formatted Script tags
+				sedRet[2] = scriptBlock.join(''); 
+				//Write File Synchronously
+				fs.writeFileSync(sourceFile, sedRet.join(''));
+
+			break;
+			case 'main':
+				banner.call(this, grunt);
+				var data = this.data;
+				var beginTag = '<!-- adrian:js -->';
+				var endTag = '<!-- endadrian -->';
+				var sourceFile = pwd() + '/' + data.dir.root + '/' + data.staticFiles[0];
+
+				var gRet = grep('-v', beginTag, sourceFile).split(endTag);
+				gRet.splice(1, 0, beginTag + '\n');
+				gRet.splice(2, 0, scriptTag('http://' + data.endPoint + '/js/' + this.target +'-'+ data.pkg + '.min.js'));
+				gRet.splice(3, 0, endTag);
+				
+				//Write File Synchronously
+				fs.writeFileSync(sourceFile, gRet.join(''));
+
+			break;
+
+			default:
+				banner.call(this, grunt);
+				this.data();
+		}
+	});	
+
+	//Load Grunt Plugins
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-wiredep');
+
+	grunt.registerTask('build', '[BUILD]', function() {
+		grunt.task.run('concat', 'uglify', 'push');
+	});
+
+// END
+};
+
+
+
+
+// Additional Script Utils
+function run(command, errorMessage, successMessage, onCompleteCommand) {
+	var command = exec(command);
+	if (command.code !== 0) {
+		// Only IF Git:
+		if(~command.output.indexOf('nothing to commit') != 0) { //if True
+			ok.call(echo, successMessage);
+			exec(onCompleteCommand);
+			return;
+		}		
+		echo(color.red('=========================================================='), true );
+		echo('[ERROR] :: ' + errorMessage);
+		echo(color.red('=========================================================='), true );
+		exit(1);
+	} else {
+		ok.call(echo, successMessage);
+		if(onCompleteCommand) {
+			exec(onCompleteCommand);
+		}
+	}
+};
+
+//Displays a banner that describes the current task
+function banner(grunt, arg) {
+	grunt.log.writeln(color.white('\n==========================================================', true) );
+	grunt.log.writeln(color.purple('\nExecuting Task [ ')+ color.yellow(this.name) + color.purple(' : ') + color.yellow(this.target, true) + color.purple(' ] ==>') + (arg || '') );
+	grunt.log.writeln(color.white('\n==========================================================') );
+};
+
+//Success Message
+function ok(msg) {
+	this(color.green('==========================================================', true));
+	this(color.yellow('---> \n[SUCCESSFUL] :: ' + msg, true));
+	this(color.green('==========================================================', true));
+};
+
+//Check for installed binary dependencies
+function hasBin(name, packageName) {
+	if (!which(name)) {
+		echo(color.red('=========================================================='), true );
+		echo(color.red('[ERROR] :: ', true) + color.red('The '+ String.prototype.toUpperCase.call(name.substr(0,1)) + name.substr(1) +' module was not found.') + ' Run: ' + packageName);
+		echo(color.red('==========================================================') );
+		exit(1);
+	}
+};

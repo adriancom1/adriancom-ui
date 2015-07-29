@@ -2,26 +2,25 @@
 
 /* App Module */
 
-var phonecatApp = angular.module('phonecatApp', [
+var projectApp = angular.module('projectApp', [
   'ngRoute',
-  'phonecatControllers',
-  'phonecatFilters',
-  'phonecatServices'
+  'projectControllers',
+  'projectEndPoint'
 ]);
 
-phonecatApp.config(['$routeProvider',
+projectApp.config(['$routeProvider',
   function($routeProvider) {
   $routeProvider.
-      when('/phones', {
-        templateUrl: 'partials/phone-list.html',
-        controller: 'PhoneListCtrl'
+      when('/projects', {
+        templateUrl: '../views/project-list.html',
+        controller: 'ProjectListCtrl'
       }).
-      when('/phones/:phoneId', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl'
+      when('/projects/:projectId', {
+        templateUrl: '../views/project-detail.html',
+        controller: 'ProjectDetailCtrl'
       }).
       otherwise({
-        redirectTo: '/phones'
+        redirectTo: '/projects'
       });
   }]);
 

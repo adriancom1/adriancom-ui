@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 	    	},
 	    	projects : {
 	    		endPoint : '<%=endPoint%>',
-	    		staticFiles: ['projects.html'],
+	    		staticFiles: ['adrian.html'],
 	    		pkg : '<%=pkg.name%>',
 	    		dir : '<%=dir%>'
 	    	},
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 		uglify: {
 			options: {
 				banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */',
-				mangle: true
+				mangle: false
 			},
 			main: {
 				files: {
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
 		},
 		wiredep: {
 			main: {
-				src: ['<%=dir.root%>/projects.html']
+				src: ['<%=dir.root%>/adrian.html']
 			}
 		}	    
 	});
@@ -130,11 +130,6 @@ module.exports = function(grunt) {
 			return '<script src="' + value + '"></script>\n'
 		};
 
-		function injectBower() {
-
-		};
-
-
 		switch(target) {
 			case 'static':
 				var args = arguments[0];
@@ -156,10 +151,13 @@ module.exports = function(grunt) {
 	    		cd('../../../build');
 	    		//If the folder is invalid
 	    		if(ls()[0] !== 'js') exit(1);
-	    		//Sync all of the Vender specific JS Minified & Gzip files
-				run('aws s3 sync . s3://adriancom --exclude "*" --include "*.min.js" --include "*.js.gzip" ', 'AWS S3 Synch failed',
+	    		
+	    		//Sync all of the Vender specific JS Minified files
+				run('aws s3 sync . s3://adriancom --exclude "*" --include "*.min.js" --exclude "*.js.gzip" ', 'AWS S3 Synch failed',
 					'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
-
+				//Sync all of the Vender specific GZIP files
+				run('aws s3 sync . s3://adriancom --exclude "*" --include "*.js.gzip" --content-encoding "gzip" ', 'AWS S3 GZIP Synch failed',
+					'GZIP Assets were pushed to AWS\n');
 
 				//Insert reference to HTML file
 				cd('..');
@@ -168,6 +166,7 @@ module.exports = function(grunt) {
 
 			break;
 			case 'projects':
+				// Wiredep will inject Bower dependencies
 				banner.call(this, grunt);
 				var data = this.data;
 				var sourceFile = pwd() + '/' + data.dir.root + '/' + data.staticFiles[0];
@@ -190,7 +189,10 @@ module.exports = function(grunt) {
 				});
 				//Remove the last item
 				scriptBlock.length = scriptBlock.length-1;
+				//Insert the script block within the bower:js tags
 				scriptBlock.push(scriptTag('http://' + data.endPoint + '/js/' + this.target +'-'+ data.pkg + '.min.js'));
+				//Insert the Angular app Js scripts
+				scriptBlock.push(scriptTag('http://' + data.endPoint + '/js/' + 'ng-'+ data.pkg + '.min.js'));
 				//Append the newly formatted Script tags
 				sedRet[2] = scriptBlock.join(''); 
 				//Write File Synchronously
@@ -198,6 +200,7 @@ module.exports = function(grunt) {
 
 			break;
 			case 'main':
+				//Custom adrian:js will inject Angular dependencies
 				banner.call(this, grunt);
 				var data = this.data;
 
@@ -239,6 +242,10 @@ module.exports = function(grunt) {
 		grunt.task.run('concat', 'uglify', 'push');
 	});
 
+	grunt.registerTask('build-dev', '[BUILD: Local]', function() {
+		grunt.task.run('concat', 'uglify');
+	});
+
 // END
 };
 
@@ -255,9 +262,9 @@ function run(command, errorMessage, successMessage, onCompleteCommand) {
 			exec(onCompleteCommand);
 			return;
 		}		
-		echo(color.red('=========================================================='), true );
+		echo(color.red('==========================================================', true));
 		echo('[ERROR] :: ' + errorMessage);
-		echo(color.red('=========================================================='), true );
+		echo(color.red('==========================================================', true));
 		exit(1);
 	} else {
 		ok.call(echo, successMessage);

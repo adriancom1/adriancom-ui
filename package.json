@@ -18,12 +18,12 @@
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "start": "echo 'build command in here'",
+    "start": "grunt build",
     "aws": "grunt push:aws",
     "server": "http-server -a 0.0.0.0 -p 8000",
     "open-local": "open http://localhost:8000/",
     "open-dev": "open http://development.adriancom-ui.divshot.io/",
     "push-dev": "grunt push:static:dev",
-    "push-prod": "grunt push:static:dev"
+    "push-prod": "grunt push:static:prod"
   }
 }

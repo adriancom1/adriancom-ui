@@ -2,12 +2,12 @@
 
 /* Services */
 
-var phonecatServices = angular.module('phonecatServices', ['ngResource']);
+var projectEndPoint = angular.module('projectEndPoint', ['ngResource']);
 
-phonecatServices.factory('Phone', ['$resource',
+projectEndPoint.factory('Project', ['$resource',
   function($resource) {
-  	var Projects = $resource('http://localhost:3000/phones/:phoneId', 
-  		{phoneId:'@phoneId'} , 
+  	var Project = $resource('http://localhost:3000/projects/:projectId',
+  		{projectId:'@projectId'} , 
   		{
 	    	query: {
 	      		method:'GET',
@@ -17,5 +17,5 @@ phonecatServices.factory('Phone', ['$resource',
 	     		isArray:true
 	     	}
     	});
-  	return Projects;
+  	return Project;
 }]);

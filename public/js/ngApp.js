@@ -12,15 +12,15 @@ projectApp.config(['$routeProvider',
   function($routeProvider) {
   $routeProvider.
       when('/projects', {
-        templateUrl: '../views/project-list.html',
-        controller: 'ProjectListCtrl'
+        redirectTo: '/projects/adrian-test'
       }).
       when('/projects/:projectId', {
         templateUrl: '../views/project-detail.html',
         controller: 'ProjectDetailCtrl'
       }).
       otherwise({
-        redirectTo: '/projects'
+        //Default Project
+        redirectTo: '/projects/adrian-test'
       });
   }]);
 

@@ -1,9 +1,94 @@
-<P>
-  Project Detail
-</p>
-<p>Project Name== {{project.name}}</p>
-<p>{{project.description}}</p>
-<p>{{project.headline}}</p>
-<p>{{project.year}}</p>
-<p>{{project.platform1}}</p>
-<p>{{project.randomQuote}}</p>
+<header class="section-header">
+  <h1 id="js-topbar-trigger">{{project.name}}</h1>
+  <p class="divider-line"><span></span></p>
+  <h2>{{project.company}}</h2>
+</header>
+<figure class="project-screenshot">
+  <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/example.png">
+  <figcaption class="contain">
+    <h3 class="headline">{{project.headline}}</h3>
+    <p class="tags">{{project.year}}<span></span>{{project.platform1}}<span></span>{{project.platform2}}</p>
+    <p>{{project.description}}</p>
+  </figcaption>
+</figure>
+<article class="subsection">
+  <header class="section-header">
+    <h3 class="headline">A peek behind the curtain</h3>
+    <p class="divider-line blue-green"><span></span><p/>
+    <p class="tags">Big Ideas<span></span>Hard Work</p>
+  </header>
+  <div class="grid-screenshot grid">
+    <div class="first-child" id="gridAnim">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/fx.jpg" class="fx" style="z-index:2;">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex6.jpg" class="fx" style="z-index:1;">
+    </div>
+    <div id="gridAnim1">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex1.jpg" class="fx" style="z-index:3;">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex2.jpg" class="fx" style="z-index:2;">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex3.jpg" class="fx" style="z-index:1;">
+    </div>
+    <div id="gridAnim2">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex2.jpg" class="fx" style="z-index:3;">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex1.jpg" class="fx" style="z-index:2;">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex3.jpg" class="fx" style="z-index:1;">              
+    </div>
+    <aside>
+      <div>
+        <p>The look and feel I wanted to evoke was:<span>Fun, sweet, and simple</span></p>
+      </div>
+      
+    </aside>
+    <div id="gridAnim3">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex1.jpg" class="fx" style="z-index:3;">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex2.jpg" class="fx" style="z-index:2;">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex3.jpg" class="fx" style="z-index:1;">
+    </div>
+    <div class="last-child" id="lastGrid">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/fx.jpg" class="fx" style="z-index:2;">
+      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex6.jpg" class="fx" style="z-index:1;">
+    </div>
+  </div>
+  <footer class="section-footer">
+    <p class="quote">"{{project.randomQuote}}"</p>
+    <p class="divider-line"><span></span><p/>
+    <p class="quote-author">{{project.quoteAuthor}}</p>
+  </footer>
+</article>
+
+<article class="subsection alternate">
+  <header class="section-header">
+    <h3 class="headline">Amazing things made possible</h3>
+    <p class="divider-line"><p/>
+    <p class="tags">Frontend<span></span>Backend</p>
+  </header>
+  <div class="grid-screenshot alternate">
+    <div class="details">
+      <h3 class="headline">Goals</h3>
+      <p class="divider-line"><span></span><p/>
+      <ul class="details">
+        <li>Elevate brand awareness</li>
+        <li>Create a cohesive identity</li>
+      </ul>
+    </div>            
+    <span class="hspace"></span>
+    <div class="details">
+      <h3 class="headline">Design</h3>
+      <p class="divider-line"><span></span><p/>
+      <ul class="details">
+        <li>Photoshop</li>
+        <li>Creative Writing</li>
+      </ul>
+    </div>
+    <span class="hspace"></span>
+    <div class="details">
+      <h3 class="headline">Development</h3>
+      <ul class="details">
+        <p class="divider-line"><span></span><p/>
+        <li>Photoshop</li>
+        <li>Javascript</li>
+        <li>Drupal</li>
+        <li>SQL</li>
+      </ul>
+    </div>          
+  </div>
+</article>

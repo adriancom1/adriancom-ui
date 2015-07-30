@@ -261,7 +261,9 @@ var DomUtils = {
 	remove : function(elementId) {
 		var _el = this._getElement(elementId);
 		_el.style.opacity = 0;
-		_el.remove();
+		//IE workaroud
+		var parent = _el.parentElement;
+		parent.removeChild(_el);
 		this._removeElement(elementId);
 	},
 	resetRule : function(ruleA, ruleB) {

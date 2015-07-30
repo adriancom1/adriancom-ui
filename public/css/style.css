@@ -5,6 +5,15 @@ svg {
   display: block;
 }
 
+/* 
+  Allow angular.js to be loaded in body, hiding cloaked elements until 
+  templates compile.  The !important is important given that there may be 
+  other selectors that are more specific or come later and might alter display.  
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
 span[class*="icon-"]:hover {
   color: #1FBAD6;
 }
@@ -1017,6 +1026,7 @@ p.divider-line span {
 
 #about {
   margin-bottom: 200px;
+  height: 1px;
 }
 
 .projects #about {
@@ -1138,7 +1148,7 @@ p.divider-line span {
 #about-how .fx {
   opacity: 0;
   transform: translateY(25%);
-  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);;
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 #about-how .fx.on {
@@ -1162,12 +1172,20 @@ p.divider-line span {
   z-index: 2;
   position: relative;
   -moz-transform:     skewY(-5deg);
-  -webkit-transform:  skewY(-5deg); 
+  -webkit-transform:  skewY(-5deg);
   -o-transform:       skewY(-5deg);
   -ms-transform:      skewY(-5deg);
   transform:          skewY(-5deg);
   -webkit-backface-visibility: hidden;
   outline: 1px solid transparent;
+}
+
+.projects #works {
+  -moz-transform:     skewY(0);
+  -webkit-transform:  skewY(0);
+  -o-transform:       skewY(0);
+  -ms-transform:      skewY(0);
+  transform:          skewY(0);  
 }
 
 .a-logo {

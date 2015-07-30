@@ -7,7 +7,7 @@ var projectControllers = angular.module('projectControllers', []);
 projectControllers.controller('ProjectListCtrl', ['$scope', 'Project',
   function($scope, Project) {    
     $scope.projects = Project.list();
-    $scope.orderProp = 'age';
+    //$scope.orderProp = 'age';
   }]);
 
 projectControllers.controller('ProjectDetailCtrl', ['$scope', '$routeParams', 'Project',

@@ -1,9 +1,19 @@
 <P>
   Project List
 </p>
-<div ng-repeat="project in projects">
+
+<div ng-controller="ProjectListCtrl" ng-repeat="project in projects">
   <p>{{project.id}} </p>
   <p>{{project.image}}</p>
   <p>{{project.name}}</p>
   <p>{{project.company}}</p>
 </div>
+
+
+Project Details
+<p>Project Name== {{project.name}}</p>
+<p>{{project.description}}</p>
+<p>{{project.headline}}</p>
+<p>{{project.year}}</p>
+<p>{{project.platform1}}</p>
+<p>{{project.randomQuote}}</p>

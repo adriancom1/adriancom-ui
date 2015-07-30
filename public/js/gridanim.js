@@ -114,17 +114,17 @@
 	//must be overridden, cannot be called direct
 	Grid.prototype.createGrid = function() {};
 
-	Grid.prototype.loadGridImages = function(path, type) {
+	Grid.prototype.loadGridImages = function(path, type, imageList) {
 		var hs = this.hotSpots;
 		var cssClass = this.fxClassName;
 		var self = this;
 
-		function load(el, name) {
+		function load(el, id) {
 			var link = document.createElement('a');
-			link.href = self.detailsPage + '?src=' + name;
+			link.href = self.detailsPage + '#/projects/' + id;
 
 			var img = document.createElement('img');
-			img.src = path + '/' + name + '.' + type;
+			img.src = path + '/' + id + '-sm.' + type;
 			
 			link.appendChild(img);
 			img.className = cssClass;
@@ -132,7 +132,7 @@
 		}
 
 		for(var i=0; i < hs.length; i++) {
-			load(hs[i],i+1)
+			load(hs[i], imageList[i])
 		}
 
 	};	

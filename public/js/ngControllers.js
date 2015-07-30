@@ -19,6 +19,12 @@ projectControllers.controller('ProjectDetailCtrl', ['$scope', '$routeParams', 'P
     $scope.setImage = function(imageUrl) {
       $scope.mainImageUrl = imageUrl;
     };
+    
+    // Enable the projects grid animation immediately after the controller renders the page
+    (function() {
+      enableGridAnim();
+    })();
+
   }]);
 
 

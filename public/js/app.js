@@ -93,12 +93,17 @@ var grid = Grid.generate({
 	width : 500,
 	height : 500,
 	cellSize : 60,
-	hotSpots : 4, 
-	detailsPage : 'projects.html'
+	hotSpots : 20, 
+	detailsPage : 'adrian.html'
 
 });
 grid.randomizeClicks();
-grid.loadGridImages(cdnEndPoint + '/img/works', 'jpg');
+
+/* adrian:js */
+var imageIdList = ['adrian-test','adrian-test2', 'linda-love'];
+/* endinject */
+
+grid.loadGridImages(cdnEndPoint + '/img/works', 'jpg', imageIdList);
 
 
 //FireFox Override Styles

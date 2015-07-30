@@ -10,11 +10,15 @@ DomUtils.setHoverFxChildren('#works figcaption',[0]);
 DomUtils.link('btn-logo', 'index.html');
 
 //Enable Grid Collage Animation
-DomUtils.slideMulti('gridAnim', 'y', '+', 8);
-DomUtils.slideMulti('gridAnim1', 'y','+', 3);
-DomUtils.slideMulti('gridAnim2', 'x','+', 5);
-DomUtils.slideMulti('gridAnim3', 'x','-', 6);
-DomUtils.slideMulti('lastGrid', 'y','-', 8);
+// This will be called once Angular completes the loading cycle
+function enableGridAnim() {
+	DomUtils.slideMulti('gridAnim', 'y', '+', 8);
+	DomUtils.slideMulti('gridAnim1', 'y','+', 3);
+	DomUtils.slideMulti('gridAnim2', 'x','+', 5);
+	DomUtils.slideMulti('gridAnim3', 'x','-', 6);
+	DomUtils.slideMulti('lastGrid', 'y','-', 8);
+};
+
 
 
 //FireFox 

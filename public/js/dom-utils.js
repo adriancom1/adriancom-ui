@@ -218,19 +218,19 @@ var DomUtils = {
 
 		axis = axis.toUpperCase();
 		for(; i<children.length; i++ ) {
-			children[i].style.transform = "translate" + axis + "(" + dir + parentDim + 'px)';
+			children[i].style.transform = children[i].style.webkitTransform = "translate" + axis + "(" + dir + parentDim + 'px)';
 			queue.push(i);
 		}
 		function reposition() {
-			children[shown].style.transform = "translate" + axis + "(" + dir + parentDim +"px)";
+			children[shown].style.transform = children[shown].style.webkitTransform = "translate" + axis + "(" + dir + parentDim +"px)";
 		};
 
 		function slideUp() {
 			shown = queue.shift();
 			//children[shown].style.transform = "translate" + axis + "(-100%)";
-			children[shown].style.transform = "translate" + axis + "(" + ((dir == '+') ? ~100 : 100) +"%)";
+			children[shown].style.transform =  children[shown].style.webkitTransform = "translate" + axis + "(" + ((dir == '+') ? ~100 : 100) +"%)";
 			visible = queue[0];
-			children[visible].style.transform = "translate" + axis + "(0)";
+			children[visible].style.transform =  children[visible].style.webkitTransform = "translate" + axis + "(0)";
 			children[visible].style.zIndex = total;
 			children[shown].style.zIndex = 0;
 			queue.push(shown);			

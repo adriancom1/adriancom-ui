@@ -63,7 +63,7 @@ body.home .intro-text .intro-text-middle .slide {
   left:0px;
   right:0px;
   background-color: #251345;
-  height:50%;
+  height:50.1%; /*Safari hack to avoid pixel horizontal line across the center */
 
   -webkit-transition: 0.45s cubic-bezier(1,0,0,1) 0.3s;
   -moz-transition:    0.45s cubic-bezier(1,0,0,1) 0.3s;

@@ -1182,11 +1182,13 @@ p.divider-line span {
 #about-how .fx {
   opacity: 0;
   transform: translateY(25%);
+  -webkit-transform: translateY(25%);
   transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 #about-how .fx.on {
   opacity: 1;
+  -webkit-transform: translateY(0);
   transform: translateY(0);
 }
 
@@ -1248,6 +1250,7 @@ p.divider-line span {
 }
 
 #works header > h1, #works header > h1 + p {
+ -webkit-transform: translateX(-100%);
  transform: translateX(-100%);
  opacity: 0.0;
  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -1260,6 +1263,7 @@ p.divider-line span {
 }
 
 #works .fx {
+  -webkit-transform: translateX(0);
   transform: translateX(0);
   opacity: 1;
 }
@@ -1271,6 +1275,7 @@ p.divider-line span {
   padding-top: 30px;
   padding-bottom: 5px;
   font-weight: 300;
+  -webkit-transform: translateX(-20px);
   transform: translateX(-20px);
 }
 
@@ -1293,12 +1298,14 @@ p.divider-line span {
   max-width: 450px;
   opacity: 0;
   transform: translateY(20px);
+  -webkit-transform: translateY(20px);
   transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 #works .project.fx {
   opacity: 1;
   transform: translateY(0);
+  -webkit-transform: translateY(0);
 }
 
 #works .project > figure {
@@ -1438,6 +1445,7 @@ p.divider-line span {
 }
 
 #contact .btn-contact:hover span {
+  -webkit-transform: translateX(110%);
   transform: translateX(110%);
 }
 

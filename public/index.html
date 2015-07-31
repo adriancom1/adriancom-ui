@@ -281,12 +281,7 @@
 		</footer>			
 	</div>
 <!-- adrian:js -->
-<script type="text/javascript" src="js/dom-utils.js"></script>
-<script type="text/javascript" src="js/scroll-utils.js"></script>
-<script type="text/javascript" src="js/gridanim.js"></script>
-<script type="text/javascript" src="js/scenes.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-
+<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/main-adriansan-ui.min.js"></script>
 <!-- endadrian -->	
 <script type="text/javascript">
 	window.onload = function() {
@@ -295,13 +290,11 @@
 				Scenes.remove('intro', ['home']);
 				//Play Video
 				var video = ScrollUtils.getElement('bgvid');
-				//if(video.readyState === 2) {
 					DomUtils.fxOn('js-main-cover');
 					setTimeout(function() {
 						DomUtils.remove('js-main-cover');
 						video.play();
 					}, 350);
-				//}			
 		});
 	};
 </script>

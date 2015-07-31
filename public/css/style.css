@@ -642,6 +642,7 @@ main[role='main'] {
 
 .innerItem.hot-spot {
   opacity: 1;
+  -webkit-transform: translateX(-5px) translateY(0);
   transform: translateX(-5px) translateY(0);
   width: 30px;
   height: 30px;
@@ -668,6 +669,7 @@ main[role='main'] {
   opacity: 1;
   width: 75px;
   height: 75px;
+  -webkit-transform: translateX(-35%) translateY(-30%);
   transform: translateX(-35%) translateY(-30%);
 }
 

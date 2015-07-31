@@ -192,7 +192,7 @@
 
 		var mouseOverHandler = SquareGrid.itemMouseOver.bind(self);
 
-		var clickHandler = function (event) {
+		var clickHandler = this.clickHandler = function (event) {
 			var el = event.target;
 			var coords = new Coords(el);
 			var items = self.getAdjacentElements(coords);
@@ -295,6 +295,10 @@
 					y = _rand(yLen-i);
 				} 
 				el = self.getElementByCoords({x: x, y: y});
+				
+				//Remove Default click handler 
+				el.removeEventListener('click', self.clickHandler);
+
 				//Test for valid element				
 				if(!el) {
 					el = _fetch(x,y);

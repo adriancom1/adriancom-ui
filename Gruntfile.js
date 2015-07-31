@@ -20,6 +20,9 @@ module.exports = function(grunt) {
 	   	},
 	   	endPoint : 'adriancom.s3-website-us-west-2.amazonaws.com',
 	   	push: {
+	   		git: function() {
+		    	run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
+		    },
 	    	aws:  function() {
 				//Change to the Assets folder
 				cd('public/assets');
@@ -52,9 +55,6 @@ module.exports = function(grunt) {
 		    static: function(environment) {
 		    	var environment = environment || 'development';
 		    	run('divshot push ' + environment, 'Sync failed.', 'Static files were pushed to ' + environment);
-		    },
-		    git: function() {
-		    	run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
 		    }
 	  	},
 		concat: {

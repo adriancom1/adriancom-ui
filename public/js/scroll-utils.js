@@ -15,7 +15,7 @@ var ScrollUtils = (function() {
 			var element = document.getElementById(id);
 		}
 		this[id] = element;
-	};
+	}; 
 
 	var _scroll = {
 		context : {},
@@ -82,9 +82,9 @@ var ScrollUtils = (function() {
 			}
 		},
 		_topCheck : function() {
-			var scrollY = window.pageYOffset || window.scrollY;
+			var scrollY = window.scrollTop || window.pageYOffset || window.scrollY;
 			var top = document.documentElement.getBoundingClientRect().top;
-			if(top == scrollY) {
+			if(top == scrollY || !scrollY) { //(!scrollY) IE Tweak
 				return true;
 			}
 			return false;

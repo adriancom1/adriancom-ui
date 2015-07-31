@@ -23,7 +23,6 @@ span[class*="icon-"]:hover {
   padding:0;
   vertical-align: baseline;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  overflow-x: none; 
 }
 
 p {
@@ -100,6 +99,10 @@ body.main .cover.fx {
 
 body.main .cover.fx.on {
   opacity: 0;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 .menu {

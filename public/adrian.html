@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
+
 <html lang="en" ng-app="projectApp">
-<!--<![endif]-->
 	<head>
 		<meta charset="UTF-8">
 		<title>Adrian Sanoguel - Designer / Developer</title>
 		<meta name="author" content="Adrian Sanoguel">
 		<meta name="viewport" width="device-width">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 		<link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
 	</head>
 	<body class="projects">
@@ -45,7 +43,8 @@
 	<div id="main-wrapper">
 		<main role="main"> 
 			<section id="about">
-				<div ng-cloak ng-view></div>
+				
+				<div ng-view ng-cloak></div>
 
 				<article id="works" class="subsection">
 					<div class="container">
@@ -330,7 +329,7 @@
 
 <!-- Dynamically Insert Project Dependencies --> 
 <!-- bower:js -->
-<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/vendor/angular.min.js.gzip"></script>
+<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/vendor/angular.min.js"></script>
 
 <script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/vendor/angular-route.min.js"></script>
 

@@ -22,6 +22,8 @@ span[class*="icon-"]:hover {
   margin: 0;
   padding:0;
   vertical-align: baseline;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-x: none; 
 }
 
 p {
@@ -676,7 +678,10 @@ div.gridContainer  {
   }
 
 .delay {
+  -ms-delay: 3s;
   -webkit-animation-delay: 3s;
+  -moz-delay: 3s;
+  -o-delay: 3s;
   animation-delay: 3s;
 
 }
@@ -684,6 +689,7 @@ div.gridContainer  {
 .drawCubicWave_off {}
 
 .drawCubicWave {
+  -ms-animation: grow 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   -webkit-animation: grow 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   -moz-animation: grow 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   animation: grow 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -707,7 +713,7 @@ div.gridContainer  {
   
 }
 
-/*@keyframes grow {
+@keyframes grow {
   0% {
     opacity: 0.2;
     background-color: #fff;
@@ -723,7 +729,7 @@ div.gridContainer  {
     opacity: 0.7;
   }
   
-}*/
+}
 
 @-webkit-keyframes grow {
   0% {
@@ -745,12 +751,34 @@ div.gridContainer  {
   
 }
 
+@-ms-keyframes grow {
+  0% {
+    opacity: 0.2;
+    background-color: #fff;
+    -ms-transform: scale(1) translateY(50%) translateX(-50%) translateZ(25%);
+    box-shadow: 2px 5px 15px 2px rgba(0,0,0,1);
+  }
+
+  30% {
+    opacity: 0.5;
+    -ms-transform: scale(1.2) translateY(-90%) translateX(100%);
+    box-shadow: 2px 5px 15px 2px rgba(0,0,0,0.5);
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+  
+}
+
 #main-wrapper {
   position: relative;
   left: 0;
   width: 100%;
   overflow: hidden;
   -webkit-transition: -webkit-transform .8s;
+  -moz-transition: -moz-transform .8s;
+  -ms-transition: -ms-transform .8s;
   transition: transform .8s;
   padding: 0 0;
   margin: 0 auto;
@@ -878,6 +906,7 @@ h1.splash-head {
 
 
 #news div.news-content.fx {
+  -ms-transition: box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   -webkit-transition: box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   -moz-transition: box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   -o-transition: box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -885,6 +914,7 @@ h1.splash-head {
 }
 
 #news div.news-content.fx:hover, .masthead.lock {
+  -ms-box-shadow: 0px 10px 25px 0px rgba(0,0,0,0.2);
   -webkit-box-shadow: 0px 10px 25px 0px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 10px 25px 0px rgba(0,0,0,0.2);
   box-shadow: 0px 10px 25px 0px rgba(0,0,0,0.2);
@@ -970,6 +1000,7 @@ h1.splash-head {
 }
 
 #news article {
+  -ms-transition: background 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   -webkit-transition: background 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   -moz-transition: background 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   -o-transition: background 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -1610,6 +1641,8 @@ p.divider-line span {
 }
 
 .grid-screenshot.grid {
+  -ms-overflow-style: none;
+  overflow: none
   overflow-x: scroll; 
   width: 1140px;
   white-space: nowrap;
@@ -1696,9 +1729,15 @@ p.divider-line span {
 }
 
 .projects #works .grid {
-  overflow-x: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
   width: inherit;
   height: inherit;
+}
+
+.projects #works .grid > ul {
+  width: inherit;
 }
 
 .projects #works p.ch0 {

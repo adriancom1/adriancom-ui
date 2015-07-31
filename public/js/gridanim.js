@@ -65,6 +65,9 @@
 					}
 				});
 			}
+		},
+		isIe : function() {
+			return (~navigator.userAgent.toLowerCase().indexOf('MSIE') != 0);
 		}
 	};	
 
@@ -104,7 +107,15 @@
 	Grid.prototype.doWave = function(x,y) {
 		var self = this;
 		var el = this.getElementByCoords({x:x, y:y});
-		el.dispatchEvent(new CustomEvent('toggle', {bubbles: true, cancelable: true, detail: self}));
+		var ev = null
+		if(DomUtils.isIe()) {
+			ev = new CustomEvent('toggle', {bubbles: true, cancelable: true, detail: self});
+		} else {
+			//IE Implements CustomEvent slightly different
+			ev = document.createEvent("CustomEvent");
+			ev.initCustomEvent('toggle', true, true, self);
+		}
+		el.dispatchEvent(ev);
 	};	
 
 	Grid.prototype.coords = function(element) {

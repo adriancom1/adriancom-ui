@@ -119,9 +119,11 @@ module.exports = function(grunt) {
 			path = path.substr(5);
 			path = path.replace(/[a-zA-Z-]*/,'js/vendor');
 			path = path.replace('.js', '.min.js');
-			if(~path.indexOf('-') == 0) {
-				path = path.replace('.js', '.js.gzip');
-			}
+			
+			//Enable this in the future, Angular Gzip tends to fail in IE
+			//if(~path.indexOf('-') == 0) {
+				//path = path.replace('.js', '.js.gzip');
+			//}
 			parts.push(path);
 			return parts.join('');
 		};
@@ -145,7 +147,9 @@ module.exports = function(grunt) {
 	    		cd(data.src+'/vendor');
 				ls().forEach(function(path) {
 					//Copy files to Build for Sync to AWS
+					cp('-Rrf', path + '/ang*.js', '../../../'+data.buildLoc+'/vendor'); //Angular only
 					cp('-Rrf', path + '/*.min.js', '../../../'+data.buildLoc+'/vendor');
+					cp('-Rrf', path + '/*.map', '../../../'+data.buildLoc+'/vendor'); //HTML5 Map files for use with .min
 					cp('-Rrf', path + '/*.js.gzip', '../../../'+data.buildLoc+'/vendor');
 				});
 	    		cd('../../../build');
@@ -153,7 +157,7 @@ module.exports = function(grunt) {
 	    		if(ls()[0] !== 'js') exit(1);
 	    		
 	    		//Sync all of the Vender specific JS Minified files
-				run('aws s3 sync . s3://adriancom --exclude "*" --include "*.min.js" --exclude "*.js.gzip" ', 'AWS S3 Synch failed',
+				run('aws s3 sync . s3://adriancom --exclude "*" --include "*.map" --include "*.js" --exclude "*.js.gzip" ', 'AWS S3 Synch failed',
 					'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
 				//Sync all of the Vender specific GZIP files
 				run('aws s3 sync . s3://adriancom --exclude "*" --include "*.js.gzip" --content-encoding "gzip" ', 'AWS S3 GZIP Synch failed',

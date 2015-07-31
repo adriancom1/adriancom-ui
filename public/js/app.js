@@ -116,3 +116,15 @@ DomUtils.randomBg({
 	folder: cdnEndPoint + '/img/bg',
 	images : ['boats.jpg', 'bulb.jpg', 'forest.jpg', 'jets.jpg', 'lights.jpg', 'ocean.jpg', 'snow.jpg']	
 });
+
+//Windows Webkit
+if(~navigator.userAgent.toLowerCase().indexOf('windows') != 0 && ~navigator.userAgent.toLowerCase().indexOf('webkit') != 0) {
+	//Custom Scrollbar for Webkit Windows
+	DomUtils.addRule('::-webkit-scrollbar {width: 6px;}');
+	DomUtils.addRule('::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); -webkit-border-radius: 10px; border-radius: 10px;}');
+	DomUtils.addRule('::-webkit-scrollbar-thumb {-webkit-border-radius: 10px;border-radius: 10px;background: rgba(0,0,0,0.2); -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);}');
+	DomUtils.addRule('::-webkit-scrollbar-thumb:window-inactive {background: rgba(0,0,0,0.4);}');
+	
+}
+
+

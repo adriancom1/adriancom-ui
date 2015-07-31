@@ -15,15 +15,12 @@ projectControllers.controller('ProjectDetailCtrl', ['$scope', '$routeParams', 'P
     $scope.project = Project.query({projectId: $routeParams.projectId}, function(project) {
       //$scope.mainImageUrl = project.images[0];
     });
-
+    
     $scope.setImage = function(imageUrl) {
       $scope.mainImageUrl = imageUrl;
     };
     
-    // Enable the projects grid animation immediately after the controller renders the page
-    (function() {
-      enableGridAnim();
-    })();
+    animInit();
 
   }]);
 

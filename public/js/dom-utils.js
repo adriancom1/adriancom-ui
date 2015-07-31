@@ -3,6 +3,7 @@ var DomUtils = {
 	elements : {},
 	mOverTarget : {},
 	mOutTarget : {},
+	isGridAnimEnabled :  false,
 	// Todo: Create a dynamic style sheet for custom rules
 	cssStyles : (function() {
 		var css = document.createElement('style');
@@ -180,6 +181,9 @@ var DomUtils = {
 	addRule : function(cssRule) {
 		this.cssStyles.insertRule(cssRule, 0);
 	},
+	animationEnabled : function(boolean) {
+		this.isGridAnimEnabled = boolean;
+	},
 	slideUpAll : function(element, delay) {
 		var self = this;
 		var _el = this.nthChild(element);
@@ -204,7 +208,7 @@ var DomUtils = {
 		var axis = axis || 'x';
 		var dir = dir || '+';
 		var shown, visible;
-		var children = this._children(elementId);
+		var children = document.getElementById(elementId).children;
 		var total = children.length;
 		var pe = children[1].parentElement;
 		var parentDim = (axis == 'x') ? pe.clientWidth : pe.clientHeight;

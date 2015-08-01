@@ -21,6 +21,7 @@
     "start": "grunt build",
     "aws": "grunt push:aws",
     "server": "http-server -a 0.0.0.0 -p 8000",
+    "build": "grunt build-dev:local",
     "open-local": "open http://localhost:8000/",
     "open-dev": "open http://development.adriancom-ui.divshot.io/",
     "push-dev": "grunt push:static:dev",

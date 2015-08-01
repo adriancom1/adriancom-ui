@@ -103,7 +103,7 @@ module.exports = function(grunt) {
 	});
 
 	// Define Multi Tasks
-	grunt.registerMultiTask('push', 'Push source files to specified environments. ', function() {
+	grunt.registerMultiTask('push', 'Push source files to specified environments. ', function(optionalFlag) {
 		var target = this.target;
 
 		//Helper function to parse the <script> blocks with the CDN Url naming info
@@ -142,10 +142,10 @@ module.exports = function(grunt) {
 				console.log('START  ',pwd())
 				//pwd() -  Returns the current working directory
 				//Copy Vendor JS Scripts to the Build directory
-				banner.call(this, grunt);
+				//banner.call(this, grunt);
 				var data = this.data;
 	    		cd(data.src+'/vendor');
-				ls().forEach(function(path) {
+	    		ls().forEach(function(path) {
 					//Copy files to Build for Sync to AWS
 					cp('-Rrf', path + '/ang*.js', '../../../'+data.buildLoc+'/vendor'); //Angular only
 					cp('-Rrf', path + '/*.min.js', '../../../'+data.buildLoc+'/vendor');
@@ -155,17 +155,21 @@ module.exports = function(grunt) {
 	    		cd('../../../build');
 	    		//If the folder is invalid
 	    		if(ls()[0] !== 'js') exit(1);
-	    		
-	    		//Sync all of the Vender specific JS Minified files
-				run('aws s3 sync . s3://adriancom --exclude "*" --include "*.map" --include "*.js" --exclude "*.js.gzip" ', 'AWS S3 Synch failed',
-					'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
-				//Sync all of the Vender specific GZIP files
-				run('aws s3 sync . s3://adriancom --exclude "*" --include "*.js.gzip" --content-encoding "gzip" ', 'AWS S3 GZIP Synch failed',
-					'GZIP Assets were pushed to AWS\n');
+	     		//Only push to AWS if flag is not set to 'local'
+	     		if(optionalFlag !== 'local') {
+		  //   		//Sync all of the Vender specific JS Minified files
+				// 	run('aws s3 sync . s3://adriancom --exclude "*" --include "*.map" --include "*.js" --exclude "*.js.gzip" ', 'AWS S3 Synch failed',
+				// 		'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
+				// 	//Sync all of the Vender specific GZIP files
+				// 	run('aws s3 sync . s3://adriancom --exclude "*" --include "*.js.gzip" --content-encoding "gzip" ', 'AWS S3 GZIP Synch failed',
+				// 		'GZIP Assets were pushed to AWS\n');
+				} else {
+					banner.call(this, grunt, 'Pushing JS scripts to Local Dev.');
+				}
 
 				//Insert reference to HTML file
 				cd('..');
-				grunt.task.run('wiredep');
+				grunt.task.run('wiredep'); //This handles the 'Projects' main template
 				console.log('END  ',pwd())
 
 			break;
@@ -247,7 +251,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('build-dev', '[BUILD: Local]', function() {
-		grunt.task.run('concat', 'uglify');
+		grunt.task.run('concat', 'uglify', 'push:js:local', 'push:projects', 'push:main');
 	});
 
 // END
@@ -281,8 +285,8 @@ function run(command, errorMessage, successMessage, onCompleteCommand) {
 //Displays a banner that describes the current task
 function banner(grunt, arg) {
 	grunt.log.writeln(color.white('\n==========================================================', true) );
-	grunt.log.writeln(color.purple('\nExecuting Task [ ')+ color.yellow(this.name) + color.purple(' : ') + color.yellow(this.target, true) + color.purple(' ] ==>') + (arg || '') );
-	grunt.log.writeln(color.white('\n==========================================================') );
+	grunt.log.writeln(color.purple('\nExecuting Task [ ')+ color.yellow(this.name) + color.purple(' : ') + color.yellow(this.target, true) + color.purple(' ] ==> ') + (arg || '') );
+	grunt.log.writeln(color.white('\n==========================================================', true) );
 };
 
 //Success Message

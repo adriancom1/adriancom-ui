@@ -14,11 +14,11 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		// Multi Tasks Configuration
 		pkg: grunt.file.readJSON('package.json'),		
-	   	dir : {root:'public', src: 'public/js', dest: 'build/js', vendor:'js/vendor/'},
+	   	dir : {root:'public', src: 'public/js', dest: 'build/js', vendor:'js/vendor/', tmp: 'tmp/js/vendor'},
 	   	pwd: function() {
 	   		return pwd();
 	   	},
-	   	endPoint : 'adriancom.s3-website-us-west-2.amazonaws.com',
+	   	endPoint : 'http://adriancom.s3-website-us-west-2.amazonaws.com',
 	   	push: {
 	   		git: function() {
 		    	run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
@@ -38,7 +38,10 @@ module.exports = function(grunt) {
 	    		buildLoc : '<%=dir.dest%>',
 	    		name : '<%=pkg.name%>',
 	    		root: '<%=dir.root%>',
-	    		src: '<%=dir.src%>'
+	    		src: '<%=dir.src%>',
+	    		tmp: '<%=dir.tmp%>',
+	    		pkg : '<%=pkg.name%>'
+
 	    	},
 	    	projects : {
 	    		endPoint : '<%=endPoint%>',
@@ -140,48 +143,60 @@ module.exports = function(grunt) {
 			break;
 			case 'js':
 				console.log('START  ',pwd())
-				//pwd() -  Returns the current working directory
-				//Copy Vendor JS Scripts to the Build directory
-				//banner.call(this, grunt);
 				var data = this.data;
-	    		cd(data.src+'/vendor');
+				var buildLoc = '../../../' + data.buildLoc + '/vendor';
+				//Change values to create a local tmp directory
+				if (optionalFlag === 'local') {
+					//Temp Local Directory
+					buildLoc = '../../'+data.tmp;
+				}
+
+				//Copy Vendor JS Scripts to the Build directory
+				banner.call(this, grunt);
+				cd(data.src+'/vendor');
 	    		ls().forEach(function(path) {
-					//Copy files to Build for Sync to AWS
-					cp('-Rrf', path + '/ang*.js', '../../../'+data.buildLoc+'/vendor'); //Angular only
-					cp('-Rrf', path + '/*.min.js', '../../../'+data.buildLoc+'/vendor');
-					cp('-Rrf', path + '/*.map', '../../../'+data.buildLoc+'/vendor'); //HTML5 Map files for use with .min
-					cp('-Rrf', path + '/*.js.gzip', '../../../'+data.buildLoc+'/vendor');
+					//Copy files to Build for Sync to CDN
+					cp('-Rrf', path + '/ang*.js', buildLoc); //Angular only
+					cp('-Rrf', path + '/*.min.js', buildLoc);
+					cp('-Rrf', path + '/*.map', buildLoc); //HTML5 Map files for use with .min
+					cp('-Rrf', path + '/*.js.gzip', buildLoc);
 				});
-	    		cd('../../../build');
-	    		//If the folder is invalid
-	    		if(ls()[0] !== 'js') exit(1);
-	     		//Only push to AWS if flag is not set to 'local'
+				
+				//Only push to AWS if flag is not set to 'local'
 	     		if(optionalFlag !== 'local') {
-		  //   		//Sync all of the Vender specific JS Minified files
-				// 	run('aws s3 sync . s3://adriancom --exclude "*" --include "*.map" --include "*.js" --exclude "*.js.gzip" ', 'AWS S3 Synch failed',
-				// 		'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
-				// 	//Sync all of the Vender specific GZIP files
-				// 	run('aws s3 sync . s3://adriancom --exclude "*" --include "*.js.gzip" --content-encoding "gzip" ', 'AWS S3 GZIP Synch failed',
-				// 		'GZIP Assets were pushed to AWS\n');
+	     			cd('../../../build');
+		    		//If the folder is invalid
+		    		if(ls()[0] !== 'js') exit(1);
+		     		//Sync all of the Vender specific JS Minified files
+					run('aws s3 sync . s3://adriancom --exclude "*" --include "*.map" --include "*.js" --exclude "*.js.gzip" ', 'AWS S3 Synch failed',
+						'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
+					//Sync all of the Vender specific GZIP files
+					run('aws s3 sync . s3://adriancom --exclude "*" --include "*.js.gzip" --content-encoding "gzip" ', 'AWS S3 GZIP Synch failed',
+						'GZIP Assets were pushed to AWS\n');
+					cd('..');
 				} else {
+					cd('../../../build/js');
+					cp('-rf', '*-' + data.pkg + '.min.js', '../../public/tmp/js');
 					banner.call(this, grunt, 'Pushing JS scripts to Local Dev.');
+					cd('../../');// Back to root
 				}
 
 				//Insert reference to HTML file
-				cd('..');
 				grunt.task.run('wiredep'); //This handles the 'Projects' main template
 				console.log('END  ',pwd())
 
 			break;
 			case 'projects':
 				// Wiredep will inject Bower dependencies
-				banner.call(this, grunt);
+				 banner.call(this, grunt);
 				var data = this.data;
+				var jsDir = '/js/';
 				var sourceFile = pwd() + '/' + data.dir.root + '/' + data.staticFiles[0];
 				var beginBower = '<!-- bower:js -->';
 				var endBower = '<!-- endbower -->';
+				var endPoint = (optionalFlag !== 'local') ? data.endPoint : data.dir.tmp;
 				//Sed Return Value
-				var sedRet = sed('-i', /js\/vendor/g, 'http://' + data.endPoint, sourceFile).split(beginBower);
+				var sedRet = sed('-i', /js\/vendor/g, endPoint, sourceFile).split(beginBower);
 				//Split the file into blocks and extract the Bower Wiredep and Script Dependencies
 				sedRet.splice(1, 0, beginBower);
 				//Split the end block from the end of the Bower tag to the end of string
@@ -193,14 +208,23 @@ module.exports = function(grunt) {
 				//Re-format the Script blocks to match the naming structure of AWS Cdn
 				var scriptBlock = sedRet[2].split('</script>');
 				scriptBlock = scriptBlock.map(function(item) {
-					return parsePath(item) + "</script>\n";
+					var endScript = "</script>\n";
+					if(optionalFlag !== 'local') {
+						return parsePath(item) + endScript;	
+					}
+					jsDir = "/";
+					//Remove Angular sub-folders when building locally
+					return item.replace(/angula..*\//, '') + endScript;
 				});
+				if (optionalFlag === 'local') {
+					endPoint = endPoint.replace('/vendor', '');
+				}
 				//Remove the last item
 				scriptBlock.length = scriptBlock.length-1;
 				//Insert the script block within the bower:js tags
-				scriptBlock.push(scriptTag('http://' + data.endPoint + '/js/' + this.target +'-'+ data.pkg + '.min.js'));
+				scriptBlock.push(scriptTag(endPoint + jsDir + this.target +'-'+ data.pkg + '.min.js'));
 				//Insert the Angular app Js scripts
-				scriptBlock.push(scriptTag('http://' + data.endPoint + '/js/' + 'ng-'+ data.pkg + '.min.js'));
+				scriptBlock.push(scriptTag(endPoint + jsDir + 'ng-'+ data.pkg + '.min.js'));
 				//Append the newly formatted Script tags
 				sedRet[2] = scriptBlock.join(''); 
 				//Write File Synchronously
@@ -216,7 +240,7 @@ module.exports = function(grunt) {
 				var beginTag = '<!-- adrian:js -->';
 				var endTag = '<!-- endadrian -->';
 				var sourceFile = pwd() + '/' + data.dir.root + '/' + data.staticFiles[0];
-				var genScript = scriptTag('http://' + data.endPoint + '/js/' + this.target +'-'+ data.pkg + '.min.js');
+				var genScript = scriptTag(data.endPoint + '/js/' + this.target +'-'+ data.pkg + '.min.js');
 				var gRet = grep('-v', beginTag, sourceFile).split(endTag);
 				
 				//Check for the existance of a <script> tag outside of the 'inject' delimiters
@@ -251,7 +275,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('build-dev', '[BUILD: Local]', function() {
-		grunt.task.run('concat', 'uglify', 'push:js:local', 'push:projects', 'push:main');
+		grunt.task.run('concat', 'uglify', 'push:js:local', 'push:projects:local', 'push:main');
 	});
 
 // END

@@ -1358,7 +1358,7 @@ p.divider-line span {
   text-transform: uppercase;
   letter-spacing: 0.5em;
   position: relative;
-  z-index: 8;  
+  z-index: 8;  e
   transform:skewY(5deg);
 } 
 

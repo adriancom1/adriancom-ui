@@ -49,12 +49,11 @@
 				<article id="works" class="subsection">
 					<div class="container">
 						<input type="text" id="js-search" name="search" class="search" placeholder="Filter all works">
-<div ng-controller="ProjectListCtrl">
-{{projects}}
-</div>							
-						<div class="grid"> <!-- add here -->
-							<ul class="clearfix">
-				                <li>
+
+						<div class="grid" ng-controller="ProjectListCtrl"> <!-- add here -->
+							<!-- <ul class="clearfix">  -->
+								<worksList info="projects"></worksList>
+				                <!-- <li>
 									<a href="#" class="project fx">						
 										<figure>
 											<figcaption>
@@ -65,7 +64,8 @@
 											<img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex2.jpg" class="fx">
 										</figure>
 									</a>
-				                </li><li>
+				                </li> --> 
+				                <!-- <li>
 									<a href="#" class="project fx">						
 										<figure>
 											<figcaption>
@@ -306,8 +306,8 @@
 											<img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/fx2.jpg" class="fx">
 										</figure>
 									</a>
-								</li>	
-					        </ul>						
+								</li> -->	
+					        <!-- </ul> -->						
 						</div> 
 					</div>
 				</article>
@@ -332,13 +332,13 @@
 
 <!-- Dynamically Insert Project Dependencies --> 
 <!-- bower:js -->
-<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/vendor/angular.min.js"></script>
+<script src="tmp/js/vendor/angular.js"></script>
 
-<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/vendor/angular-route.min.js"></script>
+<script src="tmp/js/vendor/angular-route.js"></script>
 
-<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/vendor/angular-resource.min.js"></script>
-<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/projects-adriansan-ui.min.js"></script>
-<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/ng-adriansan-ui.min.js"></script>
+<script src="tmp/js/vendor/angular-resource.js"></script>
+<script src="tmp/js/projects-adriansan-ui.min.js"></script>
+<script src="tmp/js/ng-adriansan-ui.min.js"></script>
 <!-- endbower -->
 
 </body>

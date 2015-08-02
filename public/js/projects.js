@@ -3,7 +3,7 @@ ScrollUtils.init('js-topbar-trigger').setTopHeader('main-header');
 ScrollUtils.topHeaderLock('js-topbar-trigger', 'lock');
 
 //Initialize the Selected Works Hover Effect
-//DomUtils.setHoverFxChildren('#works figcaption',[0]);
+//DomUtils.setHoverFxChildren('#works figcaption',[0]); Deprecated in exchange for Angular
 
 //Register the Nav Links
 DomUtils.link('btn-logo', 'index.html');

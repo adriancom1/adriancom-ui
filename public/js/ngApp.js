@@ -5,7 +5,8 @@
 var projectApp = angular.module('projectApp', [
   'ngRoute',
   'projectControllers',
-  'projectEndPoint'
+  'projectEndPoint',
+  'projectDirectives'
 ]);
 
 projectApp.config(['$routeProvider',

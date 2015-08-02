@@ -6,7 +6,7 @@ var projectEndPoint = angular.module('projectEndPoint', ['ngResource']);
 
 projectEndPoint.factory('Project', ['$resource',
   function($resource) {
-  	var Project = $resource('http://192.168.1.12:3000/projects/:projectId',
+  	var Project = $resource('http://localhost:3000/projects/:projectId',
   		{projectId:'@projectId'} , 
   		{
 	    	query: {

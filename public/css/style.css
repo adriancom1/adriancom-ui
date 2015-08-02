@@ -1383,6 +1383,10 @@ p.divider-line span {
   color: #1fbad6;
 }
 
+#works p.ch0.fx, #works p.ch1.fx {
+  transform: skewY(5deg);
+}
+
 #works p.ch0.fx.on, #works p.ch1.fx.on {
   opacity: 1;
 }
@@ -1779,14 +1783,15 @@ p.divider-line span {
   padding-top:43px;
 }
 
-.projects #works p.ch0.fx {
+/*Angular Filter Works Directive Rules*/
+.projects #works p.ch0.ng-binding.fx {
   transform: scale(1.5);
   transition-duration: 300ms;
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 
-.projects #works p.ch0.fx.on {
+.projects #works p.ch0.ng-binding.fx.on {
   transform: scale(1);
   transform-origin: -50% 0;
 }
@@ -1795,7 +1800,7 @@ p.divider-line span {
   background-color: #00aae7;
 }
 
-.projects #works .fx-hover.on {
+.projects #works .fx-hover .on {
   opacity: 0.8;
 }
 

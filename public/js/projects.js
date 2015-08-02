@@ -3,12 +3,12 @@ ScrollUtils.init('js-topbar-trigger').setTopHeader('main-header');
 ScrollUtils.topHeaderLock('js-topbar-trigger', 'lock');
 
 //Initialize the Selected Works Hover Effect
-DomUtils.setHoverFxChildren('#works figcaption',[0]);
+//DomUtils.setHoverFxChildren('#works figcaption',[0]);
 
 //Register the Nav Links
 DomUtils.link('btn-logo', 'index.html');
 
-//Enable Grid Collage Animation
+//Enable Grid Collage Animation, this is called from the Angular Controller
 var animInit = function() {
 	DomUtils.slideMulti('gridAnim', 'y', '+', 8);
 	DomUtils.slideMulti('gridAnim1', 'y','+', 3);

@@ -1837,9 +1837,11 @@ p.divider-line span {
 
 
 .search {
-  height: 80px;
+  height: 70px;
   width: 99%;
-  background: transparent;
+  text-indent: 10px;
+  margin-bottom: 10px;
+  background-color: #f7f7f7;
   border: none;
   font-size: 38px;
   font-weight: 300;

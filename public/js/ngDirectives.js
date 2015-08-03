@@ -4,6 +4,7 @@
 
 var projectDirectives = angular.module('projectDirectives', []);
 
+// List of Works displayed in a searchable grid
 projectDirectives.directive('worksList', ['$document', function($document) {
 
 	function setElements(event) {
@@ -36,9 +37,27 @@ projectDirectives.directive('worksList', ['$document', function($document) {
 	return {
 		controller: 'ProjectListCtrl',
 		templateUrl: '../views/project-list.html',
+		restrict: 'E',
 		scope: {
 			projectInfo: '=info'
 		},
 		link: projectListEl
 	};
 }]);
+
+// Strategy list (Goals, Design Goals)
+projectDirectives.directive('strategyList', function() {
+	return {
+		controller: 'StrategyListController',
+		restrict: 'E',
+		templateUrl: '../views/strategy-list.html',
+		scope: {
+			type: '=',
+		}
+	};
+});
+
+
+// "@"   (  Text binding / one-way binding )
+// "="   ( Direct model binding / two-way binding )
+// "&"   ( Behaviour binding / Method binding  )

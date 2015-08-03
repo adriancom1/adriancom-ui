@@ -1628,6 +1628,12 @@ p.divider-line span {
   vertical-align: middle;
 }
 
+/*Angular ng-repeat */
+.tags span.platforms::before {
+  content: '';
+  padding: 0; 
+}
+
 .quote, .quote-author {
   font-family: MetaSerifWeb-Book, serif;
 }

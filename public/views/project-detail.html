@@ -4,10 +4,10 @@
   <h2>{{project.company}}</h2>
 </header>
 <figure class="project-screenshot">
-  <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/example.png">
+  <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.hero}}">
   <figcaption class="contain">
     <h3 class="headline">{{project.headline}}</h3>
-    <p class="tags">{{project.year}}<span></span>{{project.platform1}}<span></span>{{project.platform2}}</p>
+    <p class="tags">{{project.rendition.year}}<span class="platforms" ng-repeat="platform in project.rendition.platforms"><span></span>{{platform}}</span></p>
     <p>{{project.description}}</p>
   </figcaption>
 </figure>
@@ -19,39 +19,39 @@
   </header>
   <div class="grid-screenshot grid">
     <div class="first-child" id="gridAnim">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/fx.jpg" class="fx" style="z-index:2;">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex6.jpg" class="fx" style="z-index:1;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell1[0]}}" class="fx" style="z-index:2;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell1[1]}}" class="fx" style="z-index:1;">
     </div>
     <div id="gridAnim1">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex1.jpg" class="fx" style="z-index:3;">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex2.jpg" class="fx" style="z-index:2;">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex3.jpg" class="fx" style="z-index:1;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell2[0]}}" class="fx" style="z-index:3;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell2[1]}}" class="fx" style="z-index:2;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell2[2]}}" class="fx" style="z-index:1;">
     </div>
     <div id="gridAnim2">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex2.jpg" class="fx" style="z-index:3;">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex1.jpg" class="fx" style="z-index:2;">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex3.jpg" class="fx" style="z-index:1;">              
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell3[0]}}" class="fx" style="z-index:3;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell3[1]}}" class="fx" style="z-index:2;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell3[2]}}" class="fx" style="z-index:1;">              
     </div>
     <aside>
       <div>
-        <p>The look and feel I wanted to evoke was:<span>Fun, sweet, and simple</span></p>
+        <p>{{project.slideshow.text}}<span>{{project.slideshow.highlight}}</span></p>
       </div>
       
     </aside>
     <div id="gridAnim3">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex1.jpg" class="fx" style="z-index:3;">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex2.jpg" class="fx" style="z-index:2;">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex3.jpg" class="fx" style="z-index:1;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell4[0]}}" class="fx" style="z-index:3;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell4[1]}}" class="fx" style="z-index:2;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell4[2]}}" class="fx" style="z-index:1;">
     </div>
     <div class="last-child" id="lastGrid">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/fx.jpg" class="fx" style="z-index:2;">
-      <img src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/ex6.jpg" class="fx" style="z-index:1;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell5[0]}}" class="fx" style="z-index:2;">
+      <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell5[1]}}" class="fx" style="z-index:1;">
     </div>
   </div>
   <footer class="section-footer">
-    <p class="quote">"{{project.randomQuote}}"</p>
+    <p class="quote">"{{project.slideshow.quote.text}}"</p>
     <p class="divider-line"><span></span><p/>
-    <p class="quote-author">{{project.quoteAuthor}}</p>
+    <p class="quote-author">{{project.slideshow.quote.author}}</p>
   </footer>
 </article>
 
@@ -61,34 +61,11 @@
     <p class="divider-line"><p/>
     <p class="tags">Frontend<span></span>Backend</p>
   </header>
-  <div class="grid-screenshot alternate">
-    <div class="details">
-      <h3 class="headline">Goals</h3>
-      <p class="divider-line"><span></span><p/>
-      <ul class="details">
-        <li>Elevate brand awareness</li>
-        <li>Create a cohesive identity</li>
-      </ul>
-    </div>            
+  <div class="grid-screenshot alternate" ng-controller="StrategyListController">
+    <strategy-list type="goals"></strategy-list>
     <span class="hspace"></span>
-    <div class="details">
-      <h3 class="headline">Design</h3>
-      <p class="divider-line"><span></span><p/>
-      <ul class="details">
-        <li>Photoshop</li>
-        <li>Creative Writing</li>
-      </ul>
-    </div>
+    <strategy-list type="design"></strategy-list>
     <span class="hspace"></span>
-    <div class="details">
-      <h3 class="headline">Development</h3>
-      <ul class="details">
-        <p class="divider-line"><span></span><p/>
-        <li>Photoshop</li>
-        <li>Javascript</li>
-        <li>Drupal</li>
-        <li>SQL</li>
-      </ul>
-    </div>          
+    <strategy-list type="development"></strategy-list>
   </div>
 </article>

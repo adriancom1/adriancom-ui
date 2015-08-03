@@ -7,23 +7,21 @@ var projectControllers = angular.module('projectControllers', []);
 projectControllers.controller('ProjectListCtrl', ['$scope', 'Project',
   function($scope, Project) {    
     $scope.projects = Project.list();
-    //$scope.naomi = { name: 'Naomi', address: '1600 Amphitheatre' };
-    //$scope.orderProp = 'age';
-  }]);
-
+}]);
 
 projectControllers.controller('ProjectDetailCtrl', ['$scope', '$routeParams', 'Project',
   function($scope, $routeParams, Project) {
-    $scope.project = Project.query({projectId: $routeParams.projectId}, function(project) {
-      //$scope.mainImageUrl = project.images[0];
-    });
-    
-    $scope.setImage = function(imageUrl) {
-      $scope.mainImageUrl = imageUrl;
-    };
+    $scope.project = Project.query({projectId: $routeParams.projectId});
     
     animInit();
 
-  }]);
+}])
+.controller('StrategyListController', ['$scope', '$routeParams', 'Project',
+  function($scope, $routeParams, Project) {
+    Project.query({projectId: $routeParams.projectId}, function(project) {
+      $scope.goals = project.strategy.goals;
+      $scope.design = project.strategy.design;
+      $scope.development = project.strategy.development;
+    });
 
-
+}]);

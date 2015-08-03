@@ -11,7 +11,8 @@ projectEndPoint.factory('Project', ['$resource',
   		{
 	    	query: {
 	      		method:'GET',
-	      		isArray: false
+	      		isArray: false,
+	      		cache: true
 	     	},
 	     	list : {
 	     		isArray:true

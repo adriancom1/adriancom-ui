@@ -19,6 +19,7 @@ var ScrollUtils = (function() {
 
 	var _scroll = {
 		context : {},
+		ieScrolled: false,
 		scrolledElements : [],
 		callbackQueue : [],
 		viewPortH : document.documentElement.clientHeight,
@@ -79,6 +80,7 @@ var ScrollUtils = (function() {
 				if(_targetEl) {
 					_targetEl.classList.remove(ctx.targetCss);
 				}
+				this.ieScrolled = false;
 			}
 		},
 		_topCheck : function() {
@@ -155,15 +157,31 @@ var ScrollUtils = (function() {
 			};
 			
 			if(element) {
+				var acceleration = 5;
+				//Get the User Agent
+				var uA = navigator.userAgent.toLowerCase();
+				//Windows IE
+				if(~uA.indexOf('windows') !=0 && ~uA.indexOf('trident') !=0 || ~uA.indexOf('msie') !=0) {
+					if(!this.ieScrolled) {
+						window.scroll(0,10);
+						this.ieScrolled = true;
+					}
+					acceleration = 30;
+				} //<-- End IE Fix
 				var time = setInterval(function() {
 					var scrollOffset = document.documentElement.getBoundingClientRect().bottom;
 					var scrollY = window.pageYOffset || window.scrollY; 
 					var locElement = topRect() - self.headerOffsetHeight;
-					var steps = (~incr * 0.02) * 5;
+					
+					//Safari Fix - Scroll should accelerate more for Safari
+					if(~uA.indexOf('safari') != 0 && ~uA.indexOf('chrome') == 0) {
+						acceleration = 80;
+					}
+					var steps = (~incr * 0.02) * acceleration;
 					if(isOffTop()) {
 						//Flip direction
 						locElement = ~locElement;
-						steps = (incr * 0.02) * 5;
+						steps = (incr * 0.02) * acceleration;
 					}
 					window.scroll(0, scrollY - steps);
 					if(locElement >> 63 || self._bottomCheck() || locElement <= 1) {

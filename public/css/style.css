@@ -1634,6 +1634,31 @@ p.divider-line span {
   padding: 0; 
 }
 
+.tags.launch {
+  color: #ec008c;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/*View Live Links*/
+.tags.launch span:nth-child(3)::before { 
+  content: '\25AA';
+  color:#777;
+}
+
+.tags.launch span::before {
+  content: '/'
+}
+
+.tags.launch a:hover {
+  text-decoration: underline;
+}
+
+.tags.launch .item {
+  color: #777;
+  font-weight: normal;
+}
+
 .quote, .quote-author {
   font-family: MetaSerifWeb-Book, serif;
 }

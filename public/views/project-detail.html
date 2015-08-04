@@ -11,6 +11,12 @@
     <p>{{project.description}}</p>
   </figcaption>
 </figure>
+<p class="tags launch" ng-if="project.rendition.demo">
+  <a ng-href="{{project.rendition.demo.live}}" target="_blank">view</a><span class="item">live</span>
+  <span ng-if="project.rendition.demo.promo"></span>
+  <a ng-if="project.rendition.demo.promo" ng-href="{{project.rendition.demo.promo}}" target="_blank">watch</a><span ng-if="project.rendition.demo.promo" class="item">promo</span>
+</p>
+<p ng-if="project.rendition.demo" class="tags" style="text-transform:lowercase;">( new window )</p>
 <article class="subsection">
   <header class="section-header">
     <h3 class="headline">A peek behind the curtain</h3>

@@ -21,18 +21,18 @@ module.exports = function(grunt) {
 	   	endPoint : 'http://adriancom.s3-website-us-west-2.amazonaws.com',
 	   	push: {
 	   		git: function() {
-		    	//run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
+		    	run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
 		    },
 	    	aws:  function() {
 				//Change to the Assets folder
-				// cd('public/assets');
+				cd('public/assets');
 				
-				// //Run the Sync Command. This should copy files and directories over to AWS
-				// run('aws s3 sync . s3://adriancom --exclude ".DS_*"', 'AWS S3 Synch failed',
-				// 	'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
+				//Run the Sync Command. This should copy files and directories over to AWS
+				run('aws s3 sync . s3://adriancom --exclude ".DS_*"', 'AWS S3 Synch failed',
+					'Assets were pushed to AWS', 'aws s3 ls s3://adriancom --summarize');
 				
-				// //Reset cwd location
-				// cd('../../');
+				//Reset cwd location
+				cd('../../');
 	    	},
 	    	js: {
 	    		buildLoc : '<%=dir.dest%>',
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 	    	},
 		    static: function(environment) {
 		    	var environment = environment || 'development';
-		    	//run('divshot push ' + environment, 'Sync failed.', 'Static files were pushed to ' + environment);
+		    	run('divshot push ' + environment, 'Sync failed.', 'Static files were pushed to ' + environment);
 		    }
 	  	},
 		concat: {

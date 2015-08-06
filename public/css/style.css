@@ -865,7 +865,7 @@ h1.splash-head {
 #splash > h3 {
   display:inline-block;
   margin-left: 69px;
-  font-weight: 100;
+  font-weight: 400;
   font-size: 25px;
   font-style: normal;
   line-height: 0.3em;
@@ -1119,7 +1119,7 @@ p.divider-line span {
 }
 
 #about h2 {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 400;
   color: #1FBAD6;
   letter-spacing: 0.15em;
@@ -1132,10 +1132,14 @@ p.divider-line span {
 }
 
 #about .contain p {
+  font-family: MetaSerifWeb-Book;
   box-sizing: border-box;
   margin-bottom: 30px;
+  line-height: 2.7em;
+  font-weight: 100;
+  font-size: 19px;
+  color: #999;
 }
-
 
 #about .contain p::selection {
   background: #79d6e6;
@@ -1165,6 +1169,7 @@ p.divider-line span {
   box-sizing: border-box;
   color: #F2F2F2;
   white-space: normal;
+  font-size: 24px; 
 }
 
 #about-how .contain {
@@ -1177,6 +1182,13 @@ p.divider-line span {
   padding: 0 5px;
   width: 170px;
   vertical-align: top;
+}
+
+#about-how article p {
+  font-family: 'Lato', serif!important;
+  line-height: 1.85em!important;
+  font-size: 16px!important;
+  color: #f2f2f2!important;
 }
 
 #about-how svg {
@@ -1342,6 +1354,8 @@ p.divider-line span {
   width: inherit;
   height: inherit;
   position: absolute;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 #works figcaption > div {
@@ -1543,8 +1557,11 @@ p.divider-line span {
 
 .projects #about h1 {
   font-size: 28px;
-  height: 18px;
+  height: 30px;
   color: #1eacc7;
+  font-size: 48px;
+  letter-spacing: 16px;
+  font-weight: 200;
 }
 
 .projects #about h1::after {
@@ -1562,7 +1579,7 @@ p.divider-line span {
   color: #aaa;
 }
  .projects #about .headline {
-  font-size: 1.8em;
+  font-size: 2em;
   letter-spacing: 0.02em;
  }
 
@@ -1601,6 +1618,8 @@ p.divider-line span {
 .subsection ul.details li {
   font-size: large;
   letter-spacing: 0.01em;
+  font-weight: 400;
+  line-height: 1.75em;
 }
 
 .subsection ul.details li::before {
@@ -1618,7 +1637,7 @@ p.divider-line span {
   font-size: .85em;
   text-transform: uppercase;
   letter-spacing: .02em;
-  color: #c2c2c2;
+  color: #777;
 }
 
 .tags span::before {
@@ -1626,6 +1645,11 @@ p.divider-line span {
   padding: 0 5px; 
   font-size: 0.6em;
   vertical-align: middle;
+}
+
+p.tags, span.platforms {
+  font-family: 'Lato', sans-serif!important;
+  font-size: 14px!important;
 }
 
 /*Angular ng-repeat */

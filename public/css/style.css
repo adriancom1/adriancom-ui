@@ -1556,6 +1556,7 @@ p.divider-line span {
 }
 
 .projects #about h1 {
+  white-space: nowrap;
   font-size: 28px;
   height: 30px;
   color: #1eacc7;

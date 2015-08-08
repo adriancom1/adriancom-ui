@@ -27,8 +27,12 @@ projectDirectives.directive('worksList', ['$document', function($document) {
 		
 	};
 	var projectListEl = function(scope, element, attr) {
-		element.on('mouseover', setElements.bind(event.target));
-		element.on('mouseout', setElements.bind(event.target));
+		element.on('mouseover', function(event) {
+			setElements(event);
+		});
+		element.on('mouseout', function(event) {
+			setElements(event);
+		});
 		element.on('click', function(event) {
 			//Scroll the entire document back to the top
 			window.scroll(0,0);

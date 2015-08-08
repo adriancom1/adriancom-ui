@@ -1379,7 +1379,7 @@ p.divider-line span {
 #works p.ch0 {
   margin-top: 100px;
   margin-bottom: 0.4em;
-  font-size: 18px;
+  font-size: 19px;
   color:white;
 }
 
@@ -1388,13 +1388,13 @@ p.divider-line span {
   padding: 0;
   clear: both;
 }
-
+ 
 #works p.ch1 {
   margin: 0;
   padding: 0;
   font-size: 16px;
   letter-spacing: 0.1em;
-  color: #1fbad6;
+  color: rgba(255,255,255,0.8);
 }
 
 #works p.ch0.fx, #works p.ch1.fx {

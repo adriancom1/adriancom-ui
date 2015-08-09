@@ -1348,6 +1348,20 @@ p.divider-line span {
   z-index:1;
   position: inherit;
   left:0;  
+  top: -15px;
+  transform: skewY(5deg);
+  -webkit-transform: skewY(5deg);
+  -moz-transform: skewY(5deg);
+}
+
+#works .project > figure > img.last {
+  top: -45px;
+  left: -45px;
+}
+
+#works .project > figure > img.first-row2 {
+  top: -30px;
+  left: -70px;
 }
 
 #works figcaption {
@@ -1424,11 +1438,11 @@ p.divider-line span {
 
 
 #works img {
-  transition: transform 200ms ease;
+  transition: transform 200ms ease-in-out;
 }
 
 #works img.fx.on {
-  transform: scale(1.1,1.1);  
+  transform: skewY(5deg) scale(1.1,1.1); 
 }
 
 #contact {

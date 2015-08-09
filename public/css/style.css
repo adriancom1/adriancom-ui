@@ -1402,7 +1402,7 @@ p.divider-line span {
   padding: 0;
   clear: both;
 }
- 
+
 #works p.ch1 {
   margin: 0;
   padding: 0;
@@ -1417,6 +1417,10 @@ p.divider-line span {
 
 #works p.ch0.fx.on, #works p.ch1.fx.on {
   opacity: 1;
+}
+
+#works .empty:before {
+  content: '\00a0';
 }
 
 #works .fx-hover {
@@ -1542,7 +1546,7 @@ p.divider-line span {
 }
 
 .project-screenshot > img {
-  width: 68.7%;
+  width: 78.7%;
   height: auto;
 }
 

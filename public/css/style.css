@@ -1546,7 +1546,7 @@ p.divider-line span {
 }
 
 .project-screenshot > img {
-  width: 78.7%;
+  width: 88.7%;
   height: auto;
 }
 
@@ -1624,7 +1624,7 @@ p.divider-line span {
 
 .subsection div.details {
   display: inline-block;
-  width: 23.5%;
+  width: 43.5%;
   max-width: 300px;
   text-align: left;
   vertical-align: top;
@@ -1897,10 +1897,15 @@ p.tags, span.platforms {
   background-color: #ec008c;
 }
 
-.projects #works li img { /*remove*/
+/*Works list overrides */
+.projects #works li img {
   position: absolute;
-  left: -50px;
-  top: -50px;
+  top: 0px;
+  width: 100%;
+  height: auto;
+  transform: skewY(0);
+  -webkit-transform: skewY(0);
+  -moz-transform: skewY(0);
 }
 
 

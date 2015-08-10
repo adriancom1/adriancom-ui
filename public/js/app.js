@@ -93,14 +93,14 @@ var grid = Grid.generate({
 	width : 500,
 	height : 500,
 	cellSize : 60,
-	hotSpots : 20, 
+	hotSpots : 20, //Change this to match imageIdList 
 	detailsPage : 'adrian.html'
 
 });
 grid.randomizeClicks();
 
 /* adrian:js */
-var imageIdList = ['cyclone.jpg','adrian-test','adrian-test2', 'linda-love'];
+var imageIdList = ['hurricane-interactive','adrian-test','adrian-test2', 'linda-love'];
 /* endinject */
 
 grid.loadGridImages(cdnEndPoint + '/img/works', 'jpg', imageIdList);

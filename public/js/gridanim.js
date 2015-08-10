@@ -133,7 +133,7 @@
 		function load(el, id) {
 			var link = document.createElement('a');
 			link.href = self.detailsPage + '#/projects/' + id;
-
+			//-sm suffix is necessary to prevent name conflicts when the images are placed on the CDN
 			var img = document.createElement('img');
 			img.src = path + '/' + id + '-sm.' + type;
 			

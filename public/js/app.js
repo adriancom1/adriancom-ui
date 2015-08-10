@@ -100,7 +100,7 @@ var grid = Grid.generate({
 grid.randomizeClicks();
 
 /* adrian:js */
-var imageIdList = ['adrian-test','adrian-test2', 'linda-love'];
+var imageIdList = ['cyclone.jpg','adrian-test','adrian-test2', 'linda-love'];
 /* endinject */
 
 grid.loadGridImages(cdnEndPoint + '/img/works', 'jpg', imageIdList);

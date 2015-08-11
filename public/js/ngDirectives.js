@@ -50,6 +50,15 @@ projectDirectives.directive('worksList', ['$document', function($document) {
 	};
 }]);
 
+// Main Project Screenshot
+projectDirectives.directive('projectHero', function() {
+	return {
+		controller: 'ProjectListCtrl',
+		restrict: 'E',
+		templateUrl: '../views/project-hero.html',
+	};
+});
+
 // Strategy list (Goals, Design Goals)
 projectDirectives.directive('strategyList', function() {
 	return {

@@ -82,6 +82,10 @@ ScrollUtils.link('nav-works','works');
 ScrollUtils.link('nav-contact','contact');
 ScrollUtils.link('btn-logo','top');
 
+/* adrian:js */
+var imageIdList = ['sap-hero','hurricane-interactive','adrian-test'];
+/* endinject */
+
 //Initialize the Grid Navigation
 var grid = Grid.generate({
 	id:'grid-nav',
@@ -93,15 +97,11 @@ var grid = Grid.generate({
 	width : 500,
 	height : 500,
 	cellSize : 60,
-	hotSpots : 20, //Change this to match imageIdList 
+	hotSpots : imageIdList.length,
 	detailsPage : 'adrian.html'
 
 });
 grid.randomizeClicks();
-
-/* adrian:js */
-var imageIdList = ['hurricane-interactive','adrian-test','adrian-test2', 'linda-love'];
-/* endinject */
 
 grid.loadGridImages(cdnEndPoint + '/img/works', 'jpg', imageIdList);
 

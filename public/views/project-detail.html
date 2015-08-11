@@ -3,18 +3,13 @@
   <p class="divider-line"><span></span></p>
   <h2>{{project.company}}</h2>
 </header>
-<figure class="project-screenshot">
-  <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.hero}}">
-  <figcaption class="contain">
-    <h3 class="headline">{{project.headline}}</h3>
-    <p class="tags">{{project.rendition.year}}<span class="platforms" ng-repeat="platform in project.rendition.platforms"><span></span>{{platform}}</span></p>
-    <p>{{project.description}}</p>
-  </figcaption>
-</figure>
+<project-hero></project-hero>
 <p class="tags launch" ng-if="project.rendition.demo">
-  <a ng-href="{{project.rendition.demo.live}}" target="_blank">view</a><span class="item">live</span>
+  <a ng-href="{{project.rendition.demo.live}}" target="_blank">view</a><span class="item">demo</span>
   <span ng-if="project.rendition.demo.promo"></span>
   <a ng-if="project.rendition.demo.promo" ng-href="{{project.rendition.demo.promo}}" target="_blank">watch</a><span ng-if="project.rendition.demo.promo" class="item">promo</span>
+  <span ng-if="project.rendition.demo.code"></span>
+  <a ng-if="project.rendition.demo.code" ng-href="{{project.rendition.demo.code}}" target="_blank">sample</a><span ng-if="project.rendition.demo.code" class="item">code</span>
 </p>
 <p ng-if="project.rendition.demo" class="tags" style="text-transform:lowercase;">( new window )</p>
 <article class="subsection">

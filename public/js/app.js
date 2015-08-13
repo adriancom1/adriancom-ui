@@ -83,7 +83,8 @@ ScrollUtils.link('nav-contact','contact');
 ScrollUtils.link('btn-logo','top');
 
 /* adrian:js */
-var imageIdList = ['sap-hero','hurricane-interactive','adrian-test'];
+// ID ONLY
+var imageIdList = ['sap-wcms','fox-elections','fox-infrastructure', 'sap-widgets', 'sap-hero','hurricane-interactive','adrian-test'];
 /* endinject */
 
 //Initialize the Grid Navigation

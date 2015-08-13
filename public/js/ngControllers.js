@@ -12,6 +12,7 @@ projectControllers.controller('ProjectDetailCtrl', ['$scope', '$routeParams', 'P
   function($scope, $routeParams, Project) {
     $scope.project = Project.query({projectId: $routeParams.projectId}, function(project) {
       $scope.hero = {}; //Properties for the Hero Images 
+      $scope.slideshow = {};
       $scope.hero.type = "single";
       $scope.hero.image = project.hero[0]; //Initial
 
@@ -19,9 +20,11 @@ projectControllers.controller('ProjectDetailCtrl', ['$scope', '$routeParams', 'P
         $scope.hero.type = "multiple";
         $scope.hero.images = project.hero;
       }
+      //Enable animation only when set to True
+      animInit(project.slideshow.animate);
+      
     });
 
-    animInit();
 }])
 .controller('StrategyListController', ['$scope', '$routeParams', 'Project',
   function($scope, $routeParams, Project) {

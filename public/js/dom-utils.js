@@ -3,6 +3,7 @@ var DomUtils = {
 	elements : {},
 	mOverTarget : {},
 	mOutTarget : {},
+	slideAnimQueue: [],
 	isGridAnimEnabled :  false,
 	// Todo: Create a dynamic style sheet for custom rules
 	cssStyles : (function() {
@@ -236,7 +237,13 @@ var DomUtils = {
 			queue.push(shown);			
 			setTimeout(reposition, 1000);
 		};
-		setInterval(slideUp, delay * 1000);
+		var id = setInterval(slideUp, delay * 1000);
+		this.slideAnimQueue.push(id);
+	},
+	slideMultiStop : function(index) {
+		var id = this.slideAnimQueue[index];
+		console.log(id, 'fuck!!!', this.slideAnimQueue[index], index);
+		clearInterval(id);
 	},
 	fxOn : function(elementId) {
 		var _el = this._getElement(elementId);

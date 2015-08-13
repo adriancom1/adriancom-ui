@@ -1550,6 +1550,10 @@ p.divider-line span {
   height: auto;
 }
 
+.project-screenshot img {
+  margin-top: -3px;
+}
+
 .section-header {
   padding-top: 90px;
   padding-bottom: 50px;

@@ -9,7 +9,8 @@ ScrollUtils.topHeaderLock('js-topbar-trigger', 'lock');
 DomUtils.link('btn-logo', 'index.html');
 
 //Enable Grid Collage Animation, this is called from the Angular Controller
-var animInit = function() {
+var animInit = function(animate) {
+	if(animate === false) return;
 	DomUtils.slideMulti('gridAnim', 'y', '+', 8);
 	DomUtils.slideMulti('gridAnim1', 'y','+', 3);
 	DomUtils.slideMulti('gridAnim2', 'x','+', 5);

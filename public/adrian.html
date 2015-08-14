@@ -49,10 +49,10 @@
 				<article id="works" class="subsection">
 					<div class="container" ng-controller="ProjectListCtrl">
 						<input type="text" ng-model="company" id="js-search" name="search" class="search" placeholder="&#128269; Filter all works">
-						<div class="grid">
+						<div class="grid" >
 							<ul class="clearfix">
 								<!-- Custom Angular Directive -->
-								<works-list ng-repeat="project in projects | filter:company" info="project"></works-list>
+								<works-list data-ng-init="order('-order', true)" ng-repeat="project in projects | filter:company" info="project"></works-list>
 							</ul>
 						</div> 
 					</div>
@@ -78,13 +78,13 @@
 
 <!-- Dynamically Insert Project Dependencies --> 
 <!-- bower:js -->
-<script src="tmp/js/vendor/angular.js"></script>
+<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/vendor/angular.min.js"></script>
 
-<script src="tmp/js/vendor/angular-route.js"></script>
+<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/vendor/angular-route.min.js"></script>
 
-<script src="tmp/js/vendor/angular-resource.js"></script>
-<script src="tmp/js/projects-adriansan-ui.min.js"></script>
-<script src="tmp/js/ng-adriansan-ui.min.js"></script>
+<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/vendor/angular-resource.min.js"></script>
+<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/projects-adriansan-ui.min.js"></script>
+<script src="http://adriancom.s3-website-us-west-2.amazonaws.com/js/ng-adriansan-ui.min.js"></script>
 <!-- endbower -->
 
 </body>

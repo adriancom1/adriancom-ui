@@ -3,9 +3,16 @@
 /* Controllers */
 var projectControllers = angular.module('projectControllers', []);
 
-projectControllers.controller('ProjectListCtrl', ['$scope', 'Project',
-  function($scope, Project) {    
+projectControllers.controller('ProjectListCtrl', ['$scope', '$filter', 'Project',
+  function($scope, $filter, Project) { 
+    var orderBy = $filter('orderBy');
     $scope.projects = Project.list();
+    
+    //Filter sort order
+    $scope.order = function(predicate, reverse) {
+      $scope.projects = orderBy($scope.projects, predicate, reverse);
+    };
+    
 }]);
 
 projectControllers.controller('ProjectDetailCtrl', ['$scope', '$routeParams', 'Project',
@@ -20,11 +27,10 @@ projectControllers.controller('ProjectDetailCtrl', ['$scope', '$routeParams', 'P
         $scope.hero.type = "multiple";
         $scope.hero.images = project.hero;
       }
+
       //Enable animation only when set to True
       animInit(project.slideshow.animate);
-      
     });
-
 }])
 .controller('StrategyListController', ['$scope', '$routeParams', 'Project',
   function($scope, $routeParams, Project) {

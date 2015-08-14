@@ -1,0 +1,11 @@
+<figure class="project-screenshot">
+	<img ng-if="hero.type == 'single'" ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{hero.image}}">
+	<div ng-if="hero.type == 'multiple'">
+		<img ng-repeat="img in hero.images" ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{img}}">
+	</div>
+  <figcaption class="contain">
+    <h3 class="headline">{{project.headline}}</h3>
+    <p class="tags">{{project.rendition.year}}<span class="platforms" ng-repeat="platform in project.rendition.platforms"><span></span>{{platform}}</span></p>
+    <p>{{project.description}}</p>
+  </figcaption>
+</figure

@@ -1570,6 +1570,11 @@ p.divider-line span {
   background: rgb(247,247,247, 0.9);
 }
 
+.projects #works img.fx.on {
+  transform:          skewY(0) scale(1.1,1.1); 
+  -webkit-transform:  skewY(0) scale(1.1,1.1);
+  -moz-transform:     skewY(0) scale(1.1,1.1); 
+}
 
 .projects #about h1, .projects #about h2 {
   text-transform: uppercase;
@@ -1875,10 +1880,11 @@ p.tags, span.platforms {
 }
 
 .projects #works .fx-hover {
-  background-color: #00aae7;
+  background-color: #ed008c;
+  opacity: 0;
 }
 
-.projects #works .fx-hover .on {
+.projects #works .fx-hover.on {
   opacity: 0.8;
 }
 

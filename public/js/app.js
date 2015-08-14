@@ -82,9 +82,12 @@ ScrollUtils.link('nav-works','works');
 ScrollUtils.link('nav-contact','contact');
 ScrollUtils.link('btn-logo','top');
 
-/* adrian:js */
-// ID ONLY
-var imageIdList = ['sap-wcms','fox-elections','fox-infrastructure', 'sap-widgets', 'sap-hero','hurricane-interactive','adrian-test'];
+/* adrian:js */ //--> ID ONLY
+var imageIdList = [
+	'legacy-digital', 'fedex-hub', 'scrollmotion', 'office-depot', 'ad-creative', 'fox-ureport', 'adrian-com',
+	'sap-wcms','fox-elections','fox-infrastructure', 'sap-widgets', 'sap-hero','hurricane-interactive',
+	'fox-feature-creative', 'fox-blogs' , 'fox-legacy-works'
+];
 /* endinject */
 
 //Initialize the Grid Navigation

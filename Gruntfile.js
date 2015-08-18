@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 	   	endPoint : 'http://adriancom.s3-website-us-west-2.amazonaws.com',
 	   	push: {
 	   		git: function() {
-		    	//run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
+		    	run('git commit', 'Changes have not been added to commit.', 'Changes were added.', 'git push adrian master');
 		    },
 	    	aws:  function() {
 				//Change to the Assets folder

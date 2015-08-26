@@ -84,9 +84,10 @@ ScrollUtils.link('btn-logo','top');
 
 /* adrian:js */ //--> ID ONLY
 var imageIdList = [
-	'legacy-digital', 'fedex-hub', 'scrollmotion', 'office-depot', 'ad-creative', 'fox-ureport', 'adrian-com',
-	'sap-wcms','fox-elections','fox-infrastructure', 'sap-widgets', 'sap-hero','hurricane-interactive',
-	'fox-feature-creative', 'fox-blogs' , 'fox-legacy-works'
+	'sap-hero', 'hurricane-interactive', 'fox-infrastructure', 'sap-wcms', 'sap-widgets',
+	'fox-elections', 'adrian-com', 'fox-real-american-stories', 'fox-ureport', 'office-depot',
+	'fox-talent-bios', 'ad-creative', 'scrollmotion', 'legacy-digital', 'fox-feature-creative',
+	'fox-advertise', 'archive-works'
 ];
 /* endinject */
 

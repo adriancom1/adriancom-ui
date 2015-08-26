@@ -5,24 +5,22 @@
 </header>
 <project-hero></project-hero>
 <p class="tags launch" ng-if="project.rendition.demo">
-  <a ng-href="{{project.rendition.demo.live}}" target="_blank">view</a><span class="item">demo</span>
-  <span ng-if="project.rendition.demo.promo"></span>
+  <a ng-show="project.rendition.demo.live" ng-href="{{project.rendition.demo.live}}" target="_blank">view</a><span ng-show="project.rendition.demo.live" class="item">demo</span>
+  <span ng-show="project.rendition.demo.live" ng-if="project.rendition.demo.promo"></span>
   <a ng-if="project.rendition.demo.promo" ng-href="{{project.rendition.demo.promo}}" target="_blank">watch</a><span ng-if="project.rendition.demo.promo" class="item">promo</span>
-  <span ng-if="project.rendition.demo.code"></span>
+  <span ng-show="project.rendition.demo.live" ng-if="project.rendition.demo.code"></span>
   <a ng-if="project.rendition.demo.code" ng-href="{{project.rendition.demo.code}}" target="_blank">sample</a><span ng-if="project.rendition.demo.code" class="item">code</span>
 </p>
 <p ng-if="project.rendition.demo" class="tags" style="text-transform:lowercase;">( new window )</p>
 
-<!-- ng-show="project.slideshow.animate" may need to create a show -->
-
-<article class="subsection" >
+<article class="subsection" ng-if="project.slideshow.images.cell1[0] != 'works-none.jpg'">
   <header class="section-header">
-    <h3 class="headline">A peek behind the curtain</h3>
+    <h3 class="headline">A peek behind the scenes</h3>
     <p class="divider-line blue-green"><span></span><p/>
     <p class="tags">Big Ideas<span></span>Hard Work</p>
   </header>
   <div class="grid-screenshot grid">
-    <div class="first-child" id="gridAnim">
+    <div class="first-child" id="gridAnim" >
       <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell1[0]}}" class="fx" style="z-index:2;">
       <img ng-src="http://adriancom.s3-website-us-west-2.amazonaws.com/img/projects/{{project.slideshow.images.cell1[1]}}" class="fx" style="z-index:1;">
     </div>
@@ -59,7 +57,7 @@
   </footer>
 </article>
 
-<article class="subsection alternate">
+<article class="subsection alternate" ng-if="project.strategy != 'false'">
   <header class="section-header">
     <h3 class="headline">Amazing things made possible</h3>
     <p class="divider-line"><p/>
@@ -73,3 +71,12 @@
     <strategy-list type="development"></strategy-list>
   </div>
 </article>
+
+<article class="subsection alternate" ng-if="project.strategy == 'false'">
+  <header class="section-header">
+    <h3 class="headline">Thanks for stopping by</h3>
+    <p class="divider-line"><p/>
+    <p class="tags" style="text-transform:none;">Please come back shortly.<br>See more examples below.</p>
+  </header>
+</article>
+
